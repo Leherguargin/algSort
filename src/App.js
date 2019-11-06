@@ -1,9 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Wykres from "./Wykres";
 import Navi from "./Navi";
 import Sectionn from "./Sectionn";
+import Headerr from "./Headerr";
 
 function App() {
   return (
@@ -19,16 +20,19 @@ function App() {
           overflow: "hidden"
         }}
       >
-        <aside class="aside"> ASIDE </aside>
-        <header class="header"> HEADERR </header>
-        <nav class="nav">
+        <aside class="blok"> ASIDE </aside>
+        <header class="blok">
+          <Headerr />
+        </header>
+        <nav class="blok">
           <Navi />
         </nav>
-        <section class="section"></section>
-        <footer class="footer">footer</footer>
+        <section class="blok">
+          <Sectionn />
+        </section>
+        <footer class="blok"> footer </footer>
       </container>
     </Router>
   );
 }
-
 export default App;

@@ -3,25 +3,28 @@ body {
     height: 100%;
 }
 
-.container {
+.blok {
+    box-shadow: 0 0 1px 1px rgb(106, 193, 246);
+}
+
+container {
     display: grid;
     grid-template-rows: 10% 20% 40% 20% 10%;
     grid-template-areas: "header" "nav" "section" "aside" "footer";
     text-align: center;
     height: 100%;
+    background-color: LightSkyBlue;
 }
 
-.header {
-    background-color: aqua;
+header {
     grid-area: header;
 }
 
-.nav {
-    background-color: antiquewhite;
+nav {
     grid-area: nav;
 }
 
-.section {
+section {
     grid-area: section;
     display: grid;
     grid-template-columns: 100%;
@@ -29,28 +32,23 @@ body {
     grid-template-areas: "sectionHeader" "sectionArticle" "sectionFooter";
 }
 
-.aside {
-    background-color: skyblue;
+aside {
     grid-area: aside;
 }
 
-.footer {
-    background-color: yellowgreen;
+footer {
     grid-area: footer;
 }
 
-.sectionHeader {
-    background-color: aliceblue;
+sectionHeader {
     grid-area: sectionHeader;
 }
 
-.sectionArticle {
-    background-color: aquamarine;
+sectionArticle {
     grid-area: sectionArticle;
 }
 
-.sectionFooter {
-    background-color: brown;
+sectionFooter {
     grid-area: sectionFooter;
 }
 
@@ -61,11 +59,11 @@ body {
 
 /*Small screen*/
 
-.header,
-.nav,
-.section,
-.aside,
-.footer {
+header,
+nav,
+section,
+aside,
+footer {
     width: 100%;
 }
 
@@ -73,7 +71,7 @@ body {
 /*Second width*/
 
 @media (min-width: 768px) {
-    .container {
+    container {
         display: grid;
         grid-template-columns: 150px auto 150px;
         grid-template-rows: 12.5% 62.5% 12.5% 12.5%;
@@ -81,7 +79,7 @@ body {
         align-content: stretch;
         height: 100%;
     }
-    .section {
+    section {
         grid-template-rows: 10% 80% 10%;
     }
 }
@@ -90,7 +88,7 @@ body {
 /*Large screen*/
 
 @media (min-width: 992px) {
-    .container {
+    container {
         display: grid;
         grid-template-columns: 150px auto 150px;
         grid-template-rows: 12.5% 75% 12.5%;
