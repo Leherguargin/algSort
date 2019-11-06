@@ -1,10 +1,11 @@
 import React from "react";
+import Wykres from "./Wykres";
 
 class Sectionn extends React.Component {
   render() {
     return (
       <div>
-        <h4> section! </h4>
+        <Wykres />
       </div>
     );
   }

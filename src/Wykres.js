@@ -19,11 +19,11 @@ export default class Wykres extends PureComponent {
   render() {
     return (
       <LineChart
-        width={500}
-        height={300}
+        width={1300} //jak to uzależnić od wielkości ekranu?
+        height={600}
         data={data}
         margin={{
-          top: 5,
+          top: 20,
           right: 30,
           left: 20,
           bottom: 5
