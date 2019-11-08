@@ -1,7 +1,6 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Wykres from "./Wykres";
 import Navi from "./Navi";
 import Sectionn from "./Sectionn";
 import Headerr from "./Headerr";
@@ -20,7 +19,7 @@ function App() {
           overflow: "hidden"
         }}
       >
-        <aside class="blok"> ASIDE </aside>
+        <aside class="blok"></aside>
         <header class="blok">
           <Headerr />
         </header>
@@ -30,7 +29,7 @@ function App() {
         <section class="blok">
           <Sectionn />
         </section>
-        <footer class="blok"> footer </footer>
+        <footer class="blok"></footer>
       </container>
     </Router>
   );
