@@ -7,6 +7,9 @@ class Headerr extends React.Component {
       <div>
         <h1> Alorytmy sortowania </h1>
         <div>
+          <Link to="/"> Home </Link>
+        </div>
+        <div>
           <Link to="/wykres"> Wykres </Link>
         </div>
       </div>
