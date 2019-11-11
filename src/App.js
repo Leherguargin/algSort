@@ -27,13 +27,14 @@ function App() {
           <header className="col-md-12">
             <Headerr />
           </header>
+
           <nav className="col-md-2">
             <Navi />
           </nav>
           <section className="col-md-10">
             <Sectionn />
           </section>
-          <footer className="blok"></footer>
+          <footer className="col-md-12"></footer>
         </div>
       </container>
     </Router>

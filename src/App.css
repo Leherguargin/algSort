@@ -1,8 +1,10 @@
-/* html,
-body {
-    height: 100%;
-}
-
+ html,
+ body {
+     height: 100%;
+     /* patern from toptal.com */
+     background-image: url("img/dark-honeycomb.png");
+ }
+ /*
 .blok {
     border-left: 1px solid rgb(48, 128, 160);
     border-right: 1px solid rgb(48, 128, 160);
