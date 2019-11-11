@@ -4,7 +4,11 @@ body {
 }
 
 .blok {
-    box-shadow: 0 0 1px 1px rgb(106, 193, 246);
+    /* box-shadow: 0 0 1px 1px rgb(106, 193, 246); */
+    border-left: 1px solid rgb(48, 128, 160);
+    border-right: 1px solid rgb(48, 128, 160);
+    border-bottom: 1px solid rgb(48, 128, 160);
+    border-top: 1px solid rgb(48, 128, 160);
 }
 
 container {
