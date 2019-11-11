@@ -41,7 +41,7 @@ class Navi extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <fieldset>
             <legend> Algorytmy </legend>
-            <div class="zawartosc">
+            <div className="zawartosc">
               <label>
                 <input
                   name="merge"
@@ -52,7 +52,7 @@ class Navi extends React.Component {
                 merge sort
               </label>
             </div>
-            <div class="zawartosc">
+            <div className="zawartosc">
               <label>
                 <input
                   name="bubble"
@@ -63,7 +63,7 @@ class Navi extends React.Component {
                 bubble sort
               </label>
             </div>
-            <div class="zawartosc">
+            <div className="zawartosc">
               <label>
                 <input
                   name="quick"

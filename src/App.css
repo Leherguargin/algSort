@@ -1,10 +1,9 @@
-html,
+/* html,
 body {
     height: 100%;
 }
 
 .blok {
-    /* box-shadow: 0 0 1px 1px rgb(106, 193, 246); */
     border-left: 1px solid rgb(48, 128, 160);
     border-right: 1px solid rgb(48, 128, 160);
     border-bottom: 1px solid rgb(48, 128, 160);
@@ -22,6 +21,8 @@ container {
 
 header {
     grid-area: header;
+    min-height: 100px !important;
+    background-color: antiquewhite;
 }
 
 nav {
@@ -61,7 +62,7 @@ sectionFooter {
 }
 
 
-/*Small screen*/
+
 
 header,
 nav,
@@ -72,7 +73,7 @@ footer {
 }
 
 
-/*Second width*/
+
 
 @media (min-width: 768px) {
     container {
@@ -89,7 +90,7 @@ footer {
 }
 
 
-/*Large screen*/
+
 
 @media (min-width: 992px) {
     container {
@@ -101,4 +102,4 @@ footer {
         height: 100%;
         align-content: stretch;
     }
-}
+} */
