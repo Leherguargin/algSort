@@ -1,4 +1,6 @@
 import React from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 class Navi extends React.Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class Navi extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChangeLokal = this.handleInputChangeLokal.bind(this);
     //this.polaczZapi = this.polaczZapi.bind(this);
   }
 
@@ -35,48 +38,93 @@ class Navi extends React.Component {
     );
   }
 
+  handleInputChangeLokal(e) {
+    alert("zmień wykres");
+  }
+
   render() {
     return (
-      <div>
+      <div className="m-3">
         <form onSubmit={this.handleSubmit}>
           <fieldset>
-            <legend> Algorytmy </legend>
-            <div className="zawartosc">
-              <label>
-                <input
-                  name="merge"
-                  type="checkbox"
-                  checked={this.state.merge}
-                  onChange={this.handleInputChange}
-                />
-                merge sort
-              </label>
-            </div>
-            <div className="zawartosc">
-              <label>
-                <input
-                  name="bubble"
-                  type="checkbox"
-                  checked={this.state.bubble}
-                  onChange={this.handleInputChange}
-                />
-                bubble sort
-              </label>
-            </div>
-            <div className="zawartosc">
-              <label>
-                <input
-                  name="quick"
-                  type="checkbox"
-                  checked={this.state.quick}
-                  onChange={this.handleInputChange}
-                />
-                quick sort
-              </label>
+            <legend className="text-white"> Algorytmy </legend>
+            <div className="mb-1">
+              <div>
+                <label className="text-white m-1">
+                  <input
+                    name="merge"
+                    type="checkbox"
+                    checked={this.state.merge}
+                    onChange={this.handleInputChange}
+                  />
+                  merge sort
+                </label>
+              </div>
+              <div>
+                <label className="text-white m-1">
+                  <input
+                    name="bubble"
+                    type="checkbox"
+                    checked={this.state.bubble}
+                    onChange={this.handleInputChange}
+                  />
+                  bubble sort
+                </label>
+              </div>
+              <div>
+                <label className="text-white m-1">
+                  <input
+                    name="quick"
+                    type="checkbox"
+                    checked={this.state.quick}
+                    onChange={this.handleInputChange}
+                  />
+                  quick sort
+                </label>
+              </div>
             </div>
           </fieldset>
-          <button type="submit"> Zastosuj </button>
+          <Button type="submit" variant="outline-info">
+            Zastosuj
+          </Button>
         </form>
+
+        <hr />
+        <Form>
+          <legend className="text-white"> Algorytmy </legend>
+          {["checkbox"].map(type => (
+            <div key={`inline-${type}`} className="mb-3">
+              <Form.Check
+                // inline
+                label="merge sort"
+                type={type}
+                id={`inline-${type}-1`}
+                className="text-white m-1"
+                onChange={this.handleInputChangeLokal}
+              />
+              <Form.Check
+                //inline
+                label="bubble sort"
+                type={type}
+                id={`inline-${type}-2`}
+                className="text-white m-1"
+                onChange={this.handleInputChangeLokal}
+              />
+              <Form.Check
+                //inline
+                disabled
+                label="stupid sort (disabled)"
+                type={type}
+                id={`inline-${type}-3`}
+                className="text-white m-1"
+                onChange={this.handleInputChangeLokal}
+              />
+            </div>
+          ))}
+        </Form>
+        <hr />
+        <hr />
+        <input type="file" />
       </div>
     );
   }
