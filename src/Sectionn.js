@@ -1,5 +1,6 @@
 import React from "react";
 import Wykres from "./Wykres";
+import InputFileButton from "./InputFileButton";
 import MaterialDesignTesting from "./MaterialDesignTesting";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ButtonToolbar, Button } from "react-bootstrap";
@@ -11,14 +12,11 @@ class Sectionn extends React.Component {
         <Route exact path="/wykres">
           <Wykres />
         </Route>
-
         <Route exact path="/cookies">
           <div className="text-primary">
-            <h2>sekcja ciastek</h2>
-            <Ciasteczko />
+            <h2> sekcja ciastek </h2> <Ciasteczko />
           </div>
         </Route>
-
         <Route path="/materialDesign">
           <MaterialDesignTesting />
         </Route>
@@ -93,30 +91,37 @@ class Ciasteczko extends React.Component {
           Utwórz ciasteczko
         </button>
         <br />
-        <button onClick={this.handleClick2} type="button">
-          Zjedź ciasteczko :)
+        <button
+          onClick={this.handleClick2}
+          type="button"
+          className="btn-outline-info"
+        >
+          Zjedź ciasteczko
         </button>
-        <h1>Przegląd przycisków</h1>
+        <h1> Przegląd przycisków </h1>
         <ButtonToolbar>
-          <Button variant="primary">Zastosuj</Button>
-          <Button variant="secondary">Zastosuj</Button>
-          <Button variant="success">Zastosuj</Button>
-          <Button variant="warning">Zastosuj</Button>
-          <Button variant="danger">Zastosuj</Button>
-          <Button variant="info">Zastosuj</Button>
-          <Button variant="light">Zastosuj</Button>
-          <Button variant="dark">Zastosuj</Button>
-          <Button variant="link">Zastosuj</Button>
-          <Button variant="outline-primary">Zastosuj</Button>
-          <Button variant="outline-secondary">Zastosuj</Button>
-          <Button variant="outline-success">Zastosuj</Button>
-          <Button variant="outline-warning">Zastosuj</Button>
-          <Button variant="outline-danger">Zastosuj</Button>
-          <Button variant="outline-info">Zastosuj</Button>
-          <Button variant="outline-light">Zastosuj</Button>
-          <Button variant="outline-dark">Zastosuj</Button>
-          <Button variant="outline-link">Zastosuj</Button>
+          <Button variant="primary"> Zastosuj </Button>
+          <Button variant="secondary"> Zastosuj </Button>
+          <Button variant="success"> Zastosuj </Button>
+          <Button variant="warning"> Zastosuj </Button>
+          <Button variant="danger"> Zastosuj </Button>
+          <Button variant="info"> Zastosuj </Button>
+          <Button variant="light"> Zastosuj </Button>
+          <Button variant="dark"> Zastosuj </Button>
+          <Button variant="link"> Zastosuj </Button>
+          <Button variant="outline-primary"> Zastosuj </Button>
+          <Button variant="outline-secondary"> Zastosuj </Button>
+          <Button variant="outline-success"> Zastosuj </Button>
+          <Button variant="outline-warning"> Zastosuj </Button>
+          <Button variant="outline-danger"> Zastosuj </Button>
+          <Button variant="outline-info"> Zastosuj </Button>
+          <Button variant="outline-light"> Zastosuj </Button>
+          <Button variant="outline-dark"> Zastosuj </Button>
+          <Button variant="outline-link"> Zastosuj </Button>
         </ButtonToolbar>
+        <div>
+          <InputFileButton buttonClass="outline-info" />
+        </div>
       </div>
     );
   }

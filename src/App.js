@@ -19,8 +19,8 @@ function App() {
         <section className="col-md-10">
           <Sectionn />
         </section>
-        <footer className="col-md-12"> </footer>{" "}
-      </div>{" "}
+        <footer className="col-md-12"> </footer>
+      </div>
     </Router>
   );
 }

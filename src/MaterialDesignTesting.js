@@ -12,11 +12,13 @@ export default class Wykres extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {}
+  handleChange(e) {
+    //this.setState({sliderValue: EventTarget.arguments});//napraw obsługę slajderka
+  }
 
   render() {
     return (
-      <div>
+      <div className="col-3">
         <Slider
           value={this.sliderValue}
           onChange={this.handleChange}

@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
+import InputFileButton from "./InputFileButton";
 import Button from "react-bootstrap/Button";
 
 class Navi extends React.Component {
@@ -124,7 +125,8 @@ class Navi extends React.Component {
         </Form>
         <hr />
         <hr />
-        <input type="file" />
+
+        <InputFileButton buttonClass="outline-info" />
       </div>
     );
   }
