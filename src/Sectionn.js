@@ -3,15 +3,45 @@ import Wykres from "./Wykres";
 import InputFileButton from "./InputFileButton";
 import MaterialDesignTesting from "./MaterialDesignTesting";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { ButtonToolbar, Button } from "react-bootstrap";
+//import { ButtonToolbar, Button } from "react-bootstrap";
+import Algorytmy from "./backend";
+import Generator from "./backend";
 
-class Sectionn extends React.Component {
+export default class Sectionn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.generujDaneDoWykresu = this.generujDaneDoWykresu.bind(this);
+  }
+
+  generujDaneDoWykresu(odIlu, doIlu, coIle) {
+    var daneDoWykresu = [];
+    var i = 0;
+    for (let j = odIlu; j < doIlu; j += coIle) {
+      const daneDoPracy = Generator.generatorDanychPesymistycznych(i);
+      daneDoWykresu[i] = {
+        name: j.toString(),
+        bubble_sort: Algorytmy.bubbleSort(daneDoPracy)[0],
+        pv: Algorytmy.bubbleSort(daneDoPracy)[0],
+        amt: j
+      };
+      i++;
+    }
+    return daneDoWykresu;
+  }
+
+  //componentDidMount() {}
+
   render() {
     return (
       <div>
         <Route exact path="/wykres">
-          <Wykres />
+          <Wykres
+            szerokoscWykresu={(8 / 12) * window.innerWidth}
+            wysokoscWykresu={(8 / 12) * window.innerHeight}
+            dane={this.generujDaneDoWykresu(850, 5000, 50)}
+          />
         </Route>
+
         <Route exact path="/cookies">
           <div className="text-primary">
             <h2> sekcja ciastek </h2> <Ciasteczko />
@@ -98,27 +128,6 @@ class Ciasteczko extends React.Component {
         >
           Zjedź ciasteczko
         </button>
-        <h1> Przegląd przycisków </h1>
-        <ButtonToolbar>
-          <Button variant="primary"> Zastosuj </Button>
-          <Button variant="secondary"> Zastosuj </Button>
-          <Button variant="success"> Zastosuj </Button>
-          <Button variant="warning"> Zastosuj </Button>
-          <Button variant="danger"> Zastosuj </Button>
-          <Button variant="info"> Zastosuj </Button>
-          <Button variant="light"> Zastosuj </Button>
-          <Button variant="dark"> Zastosuj </Button>
-          <Button variant="link"> Zastosuj </Button>
-          <Button variant="outline-primary"> Zastosuj </Button>
-          <Button variant="outline-secondary"> Zastosuj </Button>
-          <Button variant="outline-success"> Zastosuj </Button>
-          <Button variant="outline-warning"> Zastosuj </Button>
-          <Button variant="outline-danger"> Zastosuj </Button>
-          <Button variant="outline-info"> Zastosuj </Button>
-          <Button variant="outline-light"> Zastosuj </Button>
-          <Button variant="outline-dark"> Zastosuj </Button>
-          <Button variant="outline-link"> Zastosuj </Button>
-        </ButtonToolbar>
         <div>
           <InputFileButton buttonClass="outline-info" />
         </div>
@@ -126,5 +135,3 @@ class Ciasteczko extends React.Component {
     );
   }
 }
-
-export default Sectionn;

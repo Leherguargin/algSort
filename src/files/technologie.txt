@@ -1,0 +1,5 @@
+parsowanie xlsx:
+https://github.com/SheetJS/sheetjs/tree/7e932aec0080256b15a824a71e65a6755a9d386c/demos/react
+
+wykresy:
+http://recharts.org/en-US/examples

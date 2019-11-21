@@ -12,7 +12,6 @@ export default class InputFileButton extends React.Component {
   }
 
   handleButtonClick(e) {
-    //dokument.getElementById("my-file").click(); //nie działą zewykły js... ehh
     this.fileUpload.current.click();
   }
 
@@ -28,11 +27,8 @@ export default class InputFileButton extends React.Component {
         var workbook = XLSX.read(data, { type: "binary" });
         console.log(workbook);
         var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        var data = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 });
+        var data = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 }); //wynik jest tablicą liczb.
         console.log(data);
-        for (let j = 0; j != data.length; ++j) {
-          alert(data[j]);
-        }
 
         /* DO SOMETHING WITH workbook HERE */
       };
