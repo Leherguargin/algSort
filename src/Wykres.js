@@ -32,14 +32,14 @@ export default class Wykres extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="bubble_sort" />
+          <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
 
           <Legend />
           <Line
             type="monotone"
-            dataKey="bubble_sort"
+            dataKey="bubble_sort_time"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />

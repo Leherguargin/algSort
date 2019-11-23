@@ -17,12 +17,12 @@ export default class Sectionn extends React.Component {
     var daneDoWykresu = [];
     var i = 0;
     for (let j = odIlu; j < doIlu; j += coIle) {
-      const daneDoPracy = Generator.generatorDanychPesymistycznych(i);
       daneDoWykresu[i] = {
         name: j.toString(),
-        bubble_sort: Algorytmy.bubbleSort(daneDoPracy)[0],
-        pv: Algorytmy.bubbleSort(daneDoPracy)[0],
-        amt: j
+        bubble_sort_time: Algorytmy.bubbleSort(
+          Algorytmy.generatorDanychLosowych(j)
+        ),
+        n: j
       };
       i++;
     }
@@ -35,11 +35,23 @@ export default class Sectionn extends React.Component {
     return (
       <div>
         <Route exact path="/wykres">
-          <Wykres
+          {console.log(
+            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
+          )}
+          {console.log(
+            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
+          )}
+          {console.log(
+            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
+          )}
+          {console.log(
+            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
+          )}
+          {/* <Wykres
             szerokoscWykresu={(8 / 12) * window.innerWidth}
             wysokoscWykresu={(8 / 12) * window.innerHeight}
-            dane={this.generujDaneDoWykresu(850, 5000, 50)}
-          />
+            dane={this.generujDaneDoWykresu(40000, 50000, 10000)}
+          /> */}
         </Route>
 
         <Route exact path="/cookies">

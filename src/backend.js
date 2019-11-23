@@ -1,6 +1,7 @@
 export default class Algorytmy {
-    static bubbleSort = arr => {
-        var czas = Date.now();
+    static bubbleSort = arr => { //sortowanie rosnąco
+        //let czas = Date.now();
+        console.time("pomiar");
         let swapped;
         do {
             swapped = false;
@@ -13,21 +14,26 @@ export default class Algorytmy {
                 }
             }
         } while (swapped);
-        czas = Date.now();
-        //console.log(czas);
-        return [czas, arr];
+        //czas = Date.now() - czas;
+        console.timeEnd("pomiar");
+        return czas;
     };
 
-    static generatorDanychLosowych(n) {
-        //generuj "n" danych losowych
+    static getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    static generatorDanychLosowych(n) { //jakie dane losować?
         let dane = [];
         for (let i = 0; i < n; i++) {
-            dane[i] = Math.round(10 * Math.random());
+            dane[i] = this.getRandomInt(0, n);
         }
         return dane;
     }
 
-    static generatorDanychPesymistycznych = n => {
+    static generatorDanychPesymistycznych = n => { //dobrze?
         let dane = [];
         for (let i = 0; i < n; i++) {
             dane[i] = n - i;
@@ -35,10 +41,10 @@ export default class Algorytmy {
         return dane;
     }
 
-    static generatorDanychOptymistycznych = n => {
+    static generatorDanychOptymistycznych = n => { //dobrze?
         let dane = [];
         for (let i = 0; i < n; i++) {
-            dane[i] = n - i;
+            dane[i] = i;
         }
         return dane;
     }
