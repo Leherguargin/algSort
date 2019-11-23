@@ -35,7 +35,7 @@ export default class Sectionn extends React.Component {
     return (
       <div>
         <Route exact path="/wykres">
-          {console.log(
+          {/* {console.log(
             Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
           )}
           {console.log(
@@ -46,12 +46,12 @@ export default class Sectionn extends React.Component {
           )}
           {console.log(
             Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
-          )}
-          {/* <Wykres
+          )} */}
+          <Wykres
             szerokoscWykresu={(8 / 12) * window.innerWidth}
             wysokoscWykresu={(8 / 12) * window.innerHeight}
-            dane={this.generujDaneDoWykresu(40000, 50000, 10000)}
-          /> */}
+            dane={this.generujDaneDoWykresu(10000, 50000, 10000)}
+          />
         </Route>
 
         <Route exact path="/cookies">
