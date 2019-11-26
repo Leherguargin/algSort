@@ -28,11 +28,16 @@ class Navbarr extends React.Component {
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/wykres" className="text-info">
+              <Link to="/wykresy" className="text-info">
                 Wykres
               </Link>
             </Nav.Link>
-            <NavDropdown
+            <Nav.Link>
+              <Link to="/animacje" className="text-info">
+                Animacje
+              </Link>
+            </Nav.Link>
+            {/* <NavDropdown
               title="Dropdown"
               id="basic-nav-dropdown"
               className="text-info" //nic to nie daje chbya
@@ -46,7 +51,7 @@ class Navbarr extends React.Component {
               <NavDropdown.Item href="#action/3.4">
                 Separated link
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

@@ -16,6 +16,19 @@ import {
 export default class Wykres extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
+  constructor(props) {
+    super(props);
+    this.psumaCzasow = this.psumaCzasow.bind(this);
+  }
+
+  psumaCzasow(dane) {
+    let sumaCzasow = 0;
+    dane.forEach(element => {
+      sumaCzasow += element.bubble_sort_time;
+    });
+    return sumaCzasow / 1000;
+  }
+
   render() {
     return (
       <div>
@@ -45,6 +58,9 @@ export default class Wykres extends PureComponent {
           />
           {/* <Line type="monotone" dataKey="p" stroke="#82ca9d" /> */}
         </LineChart>
+        <p className="text-white">
+          suma czasu: {this.psumaCzasow(this.props.dane)}
+        </p>
       </div>
     );
   }

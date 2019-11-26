@@ -1,7 +1,7 @@
 export default class Algorytmy {
     static bubbleSort = arr => { //sortowanie rosnąco
         let czas = Date.now();
-        console.time("pomiar");
+        //console.time("pomiar");
         let swapped;
         do {
             swapped = false;
@@ -15,7 +15,7 @@ export default class Algorytmy {
             }
         } while (swapped);
         czas = Date.now() - czas;
-        console.timeEnd("pomiar");
+        //console.timeEnd("pomiar");
         return czas;
     };
 

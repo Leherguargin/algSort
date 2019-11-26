@@ -4,23 +4,29 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Navi from "./Navi";
-import Sectionn from "./Sectionn";
+import Wykresy from "./Wykresy";
 import NavBarr from "./Navbarr";
+import Ciasteczko from "./Cookies";
+import MaterialDesignTesting from "./MaterialDesignTesting";
+import { Form, Button } from "react-bootstrap";
 
 function App() {
   return (
     <Router>
       <NavBarr />
-      <div className="row">
-        <nav className="col-md-2">
-          <Navi />
-        </nav>
-        <section className="col-md-10">
-          <Sectionn />
-        </section>
-        <footer className="col-md-12"> </footer>
-      </div>
+
+      <Route exact path="/wykresy">
+        <Wykresy />
+      </Route>
+
+      <Route exact path="/cookies">
+        <div className="text-primary">
+          <h2> sekcja ciastek </h2> <Ciasteczko />
+        </div>
+      </Route>
+      <Route path="/materialDesign">
+        <MaterialDesignTesting />
+      </Route>
     </Router>
   );
 }

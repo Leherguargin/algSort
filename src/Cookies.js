@@ -1,73 +1,7 @@
 import React from "react";
-import Wykres from "./Wykres";
 import InputFileButton from "./InputFileButton";
-import MaterialDesignTesting from "./MaterialDesignTesting";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-//import { ButtonToolbar, Button } from "react-bootstrap";
-import Algorytmy from "./backend";
-import Generator from "./backend";
 
-export default class Sectionn extends React.Component {
-  constructor(props) {
-    super(props);
-    this.generujDaneDoWykresu = this.generujDaneDoWykresu.bind(this);
-  }
-
-  generujDaneDoWykresu(odIlu, doIlu, coIle) {
-    var daneDoWykresu = [];
-    var i = 0;
-    for (let j = odIlu; j < doIlu; j += coIle) {
-      daneDoWykresu[i] = {
-        name: j.toString(),
-        bubble_sort_time: Algorytmy.bubbleSort(
-          Algorytmy.generatorDanychLosowych(j)
-        ),
-        n: j
-      };
-      i++;
-    }
-    return daneDoWykresu;
-  }
-
-  //componentDidMount() {}
-
-  render() {
-    return (
-      <div>
-        <Route exact path="/wykres">
-          {/* {console.log(
-            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
-          )}
-          {console.log(
-            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
-          )}
-          {console.log(
-            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
-          )}
-          {console.log(
-            Algorytmy.bubbleSort(Algorytmy.generatorDanychLosowych(10000))
-          )} */}
-          <Wykres
-            szerokoscWykresu={(8 / 12) * window.innerWidth}
-            wysokoscWykresu={(8 / 12) * window.innerHeight}
-            dane={this.generujDaneDoWykresu(10000, 50000, 10000)}
-          />
-        </Route>
-
-        <Route exact path="/cookies">
-          <div className="text-primary">
-            <h2> sekcja ciastek </h2> <Ciasteczko />
-          </div>
-        </Route>
-        <Route path="/materialDesign">
-          <MaterialDesignTesting />
-        </Route>
-      </div>
-    );
-  }
-}
-
-class Ciasteczko extends React.Component {
+export default class Ciasteczko extends React.Component {
   constructor(props) {
     super(props);
 

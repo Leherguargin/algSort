@@ -1,7 +1,6 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import InputFileButton from "./InputFileButton";
-import Button from "react-bootstrap/Button";
+import { Col, Row, Button, Form, Jumbotron } from "react-bootstrap";
 
 class Navi extends React.Component {
   constructor(props) {
@@ -13,15 +12,7 @@ class Navi extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChangeLokal = this.handleInputChangeLokal.bind(this);
-    //this.polaczZapi = this.polaczZapi.bind(this);
   }
-
-  // polaczZapi() {
-  //   //const value = this.refs.number.value;
-  //   console.log(value);
-  //   fetch(`http://localhost:3001/a`).then(res => console.log(res));
-  // }
 
   handleInputChange(event) {
     const target = event.target;
@@ -39,94 +30,52 @@ class Navi extends React.Component {
     );
   }
 
-  handleInputChangeLokal(e) {
-    alert("zmień wykres");
-  }
-
   render() {
     return (
       <div className="m-3">
-        <form onSubmit={this.handleSubmit}>
-          <fieldset>
-            <legend className="text-white"> Algorytmy </legend>
-            <div className="mb-1">
-              <div>
-                <label className="text-white m-1">
-                  <input
-                    name="merge"
-                    type="checkbox"
-                    checked={this.state.merge}
-                    onChange={this.handleInputChange}
-                  />
-                  merge sort
-                </label>
-              </div>
-              <div>
-                <label className="text-white m-1">
-                  <input
-                    name="bubble"
-                    type="checkbox"
-                    checked={this.state.bubble}
-                    onChange={this.handleInputChange}
-                  />
-                  bubble sort
-                </label>
-              </div>
-              <div>
-                <label className="text-white m-1">
-                  <input
-                    name="quick"
-                    type="checkbox"
-                    checked={this.state.quick}
-                    onChange={this.handleInputChange}
-                  />
-                  quick sort
-                </label>
-              </div>
-            </div>
-          </fieldset>
-          <Button type="submit" variant="outline-info">
-            Zastosuj
-          </Button>
-        </form>
-
-        <hr />
-        <Form>
+        <Form className="m-3">
           <legend className="text-white"> Algorytmy </legend>
           {["checkbox"].map(type => (
-            <div key={`inline-${type}`} className="mb-3">
+            <div key={`inline-${type}`} className="m-3">
               <Form.Check
-                // inline
                 label="merge sort"
                 type={type}
-                id={`inline-${type}-1`}
+                name="merge"
                 className="text-white m-1"
-                onChange={this.handleInputChangeLokal}
+                onChange={this.handleInputChange}
+                checked={this.state.merge}
               />
               <Form.Check
-                //inline
                 label="bubble sort"
                 type={type}
-                id={`inline-${type}-2`}
+                name="bubble"
                 className="text-white m-1"
-                onChange={this.handleInputChangeLokal}
+                onChange={this.handleInputChange}
+                checked={this.state.bubble}
               />
               <Form.Check
-                //inline
-                disabled
-                label="stupid sort (disabled)"
+                label="quick sort"
                 type={type}
-                id={`inline-${type}-3`}
+                name="quick"
                 className="text-white m-1"
-                onChange={this.handleInputChangeLokal}
+                onChange={this.handleInputChange}
+                checked={this.state.quick}
               />
             </div>
           ))}
+          <Button
+            type="button"
+            variant="outline-info"
+            onClick={this.handleSubmit}
+          >
+            Zastosuj
+          </Button>
         </Form>
-        <hr />
-        <hr />
 
-        <InputFileButton buttonClass="outline-info" />
+        <div className="m-3">
+          <legend className="text-white">Z pliku excel</legend>
+          <InputFileButton buttonClass="outline-info" />
+        </div>
       </div>
     );
   }
