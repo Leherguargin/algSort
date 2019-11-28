@@ -11,7 +11,8 @@ class Navi extends React.Component {
       merge: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.obslugaDanychWykresu = this.obslugaDanychWykresu.bind(this);
+    this.obslugaExcela = this.obslugaExcela.bind(this);
   }
 
   handleInputChange(event) {
@@ -24,10 +25,12 @@ class Navi extends React.Component {
     });
   }
 
-  handleSubmit(e) {
-    alert(
-      `zasubminowano bubble: ${this.state.bubble} quick: ${this.state.quick} merge: ${this.state.merge}`
-    );
+  obslugaDanychWykresu(e) {
+    this.props.danePowrotne(e, this.state);
+  }
+
+  obslugaExcela(e) {
+    this.props.danePowrotne(e, this.state);
   }
 
   render() {
@@ -66,7 +69,7 @@ class Navi extends React.Component {
           <Button
             type="button"
             variant="outline-info"
-            onClick={this.handleSubmit}
+            onClick={this.obslugaDanychWykresu}
           >
             Zastosuj
           </Button>
@@ -74,7 +77,10 @@ class Navi extends React.Component {
 
         <div className="m-3">
           <legend className="text-white">Z pliku excel</legend>
-          <InputFileButton buttonClass="outline-info" />
+          <InputFileButton
+            buttonClass="outline-info"
+            obslugaExcela={this.obslugaExcela}
+          />
         </div>
       </div>
     );

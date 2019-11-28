@@ -9,6 +9,12 @@ export default class Wykresy extends React.Component {
   constructor(props) {
     super(props);
     this.generujDaneDoWykresu = this.generujDaneDoWykresu.bind(this);
+    this.obslugaNawigacji = this.obslugaNawigacji.bind(this);
+  }
+
+  obslugaNawigacji(e, stan) {
+    console.log(e);
+    console.log(stan);
   }
 
   generujDaneDoWykresu(odIlu, doIlu, coIle) {
@@ -32,7 +38,7 @@ export default class Wykresy extends React.Component {
       <div>
         <div className="row">
           <nav className="col-md-2">
-            <Navi />
+            <Navi danePowrotne={this.obslugaNawigacji} />
           </nav>
           <section className="col-md-10">
             <Wykres

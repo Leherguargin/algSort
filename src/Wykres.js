@@ -11,7 +11,7 @@ import {
   Legend
 } from "recharts";
 
-//const data = dane.dane_do_wykresu; //dane z jsona z serwera
+//const data = dane.dane_do_wykresu; //dane z jsona z pliku
 
 export default class Wykres extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
@@ -32,7 +32,6 @@ export default class Wykres extends PureComponent {
   render() {
     return (
       <div>
-        {console.log(this.props.dane)}
         <LineChart
           width={this.props.szerokoscWykresu}
           height={this.props.wysokoscWykresu}
@@ -48,7 +47,6 @@ export default class Wykres extends PureComponent {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-
           <Legend />
           <Line
             type="monotone"
