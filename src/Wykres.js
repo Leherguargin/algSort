@@ -19,6 +19,7 @@ export default class Wykres extends PureComponent {
   constructor(props) {
     super(props);
     this.psumaCzasow = this.psumaCzasow.bind(this);
+    //this.renderColorfulLegendText = this.renderColorfulLegendText.bind(this);
   }
 
   psumaCzasow(dane) {
@@ -27,6 +28,12 @@ export default class Wykres extends PureComponent {
       sumaCzasow += element.bubble_sort_time;
     });
     return sumaCzasow / 1000;
+  }
+
+  renderColorfulLegendText(value, entry) {
+    const { color } = entry;
+
+    return <span style={{ color }}>{value}</span>;
   }
 
   render() {
@@ -47,11 +54,11 @@ export default class Wykres extends PureComponent {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Legend />
+          <Legend stroke="#C8E40F" formatter={this.renderColorfulLegendText} />
           <Line
             type="monotone"
             dataKey="bubble_sort_time"
-            stroke="#8884d8"
+            stroke="#C8E40F"
             activeDot={{ r: 8 }}
           />
           {/* <Line type="monotone" dataKey="p" stroke="#82ca9d" /> */}

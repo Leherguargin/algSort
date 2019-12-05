@@ -7,16 +7,25 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Wykresy from "./Wykresy";
 import NavBarr from "./Navbarr";
 import Ciasteczko from "./Cookies";
+import Animacje from "./Animacje";
 import MaterialDesignTesting from "./MaterialDesignTesting";
-import { Form, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 function App() {
   return (
     <Router>
-      <NavBarr />
+      <Row>
+        <Col md="12">
+          <NavBarr />
+        </Col>
+      </Row>
 
       <Route exact path="/wykresy">
         <Wykresy />
+      </Route>
+
+      <Route exact path="/animacje">
+        <Animacje />
       </Route>
 
       <Route exact path="/cookies">
@@ -24,6 +33,7 @@ function App() {
           <h2> sekcja ciastek </h2> <Ciasteczko />
         </div>
       </Route>
+
       <Route path="/materialDesign">
         <MaterialDesignTesting />
       </Route>

@@ -62,7 +62,7 @@ export default class Ciasteczko extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
         <button onClick={this.handleClick} type="button">
           Utwórz ciasteczko
         </button>

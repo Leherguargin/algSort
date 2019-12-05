@@ -1,8 +1,6 @@
 import React from "react";
 import Wykres from "./Wykres";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-//import { ButtonToolbar, Button } from "react-bootstrap";
-import Algorytmy from "./backend";
+import Algorytmy from "./backend.js";
 import Navi from "./Navi";
 
 export default class Wykresy extends React.Component {
@@ -44,7 +42,7 @@ export default class Wykresy extends React.Component {
             <Wykres
               szerokoscWykresu={(8 / 12) * window.innerWidth}
               wysokoscWykresu={(8 / 12) * window.innerHeight}
-              dane={this.generujDaneDoWykresu(1600, 2000, 100)}
+              dane={this.generujDaneDoWykresu(1600, 6000, 100)}
             />
           </section>
           <footer className="col-md-12"> </footer>
