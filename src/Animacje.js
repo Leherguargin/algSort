@@ -1,52 +1,86 @@
 import React from "react";
 import "./styleAnimation.css";
 import { gsap } from "gsap";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 export default class Animacje extends React.Component {
   constructor(props) {
     super(props);
-
+    this.tl = gsap.timeline();
+    this.tab = null;
+    this.trojkat = null;
     this.bubbleSortAnimation = this.bubbleSortAnimation.bind(this);
+    this.randomValues = this.randomValues.bind(this);
+  }
+
+  componentDidMount() {
+    this.tab = document.querySelectorAll(".element");
+    this.trojkat = document.querySelectorAll(".triangle");
+    //for (let i = 0; i < 1000; i++)//test losowania
+    //console.log(Math.floor(Math.random() * 10) % 8);
   }
 
   render() {
     return (
       <main>
         <Row>
-          <Col md="3">
-            <div style={{}}>
-              <button className="type-info" onClick={this.bubbleSortAnimation}>
-                Sortuj
-              </button>
-            </div>
+          <Col md="2" className="m-3">
+            <nav>
+              <div m="2">
+                <Button
+                  variant="outline-info"
+                  onClick={this.bubbleSortAnimation}
+                  style={{ "margin-left": "auto", "margin-right": "auto" }}
+                >
+                  Sortuj
+                </Button>
+              </div>
+              <div m="2">
+                <Button variant="outline-info" onClick={this.randomValues}>
+                  Losuj wartości
+                </Button>
+              </div>
+            </nav>
           </Col>
-          <Col md="9">
+          <Col
+            md="10"
+            style={{ "margin-left": "auto", "margin-right": "auto" }}
+          >
             <div class="board">
               <div class="element">
-                <p>8</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>7</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>6</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>5</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>4</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>3</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>2</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
               <div class="element">
-                <p>1</p>
+                <p>{Math.floor(Math.random() * 10) % 8}</p>
               </div>
+            </div>
+            <div class="boardTriangle">
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
+              <div class="triangle"></div>
             </div>
           </Col>
         </Row>
@@ -56,20 +90,24 @@ export default class Animacje extends React.Component {
 
   bubbleSortAnimation() {
     //sortowanie rosnąco, działa animacja
-    const tl = gsap.timeline();
-    let xD = document.querySelectorAll(".element");
     let elements = [];
     let x = [];
-    for (let i = 0; i < xD.length; i++) {
-      elements[i] = xD[i];
+    for (let i = 0; i < this.tab.length; i++) {
+      elements[i] = this.tab[i];
       x[i] = 0;
     }
     let swapped;
     do {
       swapped = false;
       for (let i = 0; i < elements.length - 1; i++) {
+        this.tl
+          .to(this.trojkat[i], 1, { opacity: 1 })
+          .to(this.trojkat[i + 1], 1, { opacity: 1 }, "-=1")
+          .to(this.trojkat[i], 1, { opacity: 0 })
+          .to(this.trojkat[i + 1], 1, { opacity: 0 }, "-=1");
         if (elements[i].innerText > elements[i + 1].innerText) {
-          tl.to(elements[i + 1], 1, { x: (x[i + 1] += -67), y: -67 })
+          this.tl
+            .to(elements[i + 1], 1, { x: (x[i + 1] += -67), y: -67 })
             .to(elements[i], 1, { x: (x[i] += 67), y: 67 }, "-=1")
             .to(elements[i + 1], 1, { x: (x[i + 1] += -67), y: 0 })
             .to(elements[i], 1, { x: (x[i] += 67), y: 0 }, "-=1");
@@ -86,5 +124,11 @@ export default class Animacje extends React.Component {
         }
       }
     } while (swapped);
+  }
+
+  randomValues() {
+    for (let i = 0; i < this.tab.length; i++) {
+      this.tab[i].innerText = Math.floor(Math.random() * 10) % 20;
+    }
   }
 }

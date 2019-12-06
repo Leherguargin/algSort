@@ -17,6 +17,14 @@ main {
     border: 4px solid black;
 }
 
+.boardTriangle {
+    position: relative;
+    width: 1080px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .element {
     background-color: #209781;
     color: black;
@@ -34,4 +42,17 @@ main {
 .xxx {
     /*to jest barddzo głupie*/
     line-height: 160px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #f34a53;
+    margin: 10px auto 0;
+    margin-left: 57px;
+    margin-right: 57px;
+    display: inline-block;
+    opacity: 0;
 }
