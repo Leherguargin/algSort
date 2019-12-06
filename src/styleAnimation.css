@@ -10,7 +10,7 @@ main {
 .board {
     position: relative;
     background-color: white;
-    width: 1080px;
+    width: 1040px;
     align-content: center;
     margin-left: auto;
     margin-right: auto;
@@ -30,10 +30,10 @@ main {
     color: black;
     text-shadow: none;
     text-align: center;
-    width: 130px;
-    height: 130px;
+    width: 122px;
+    height: 122px;
     margin: 2px;
-    padding: 30px;
+    /* padding: 30px; */
     display: inline-block;
     border: 2px solid black;
     line-height: 65px;
@@ -51,8 +51,8 @@ main {
     border-right: 10px solid transparent;
     border-bottom: 20px solid #f34a53;
     margin: 10px auto 0;
-    margin-left: 57px;
-    margin-right: 57px;
+    margin-left: 55px;
+    margin-right: 55px;
     display: inline-block;
     opacity: 0;
 }
