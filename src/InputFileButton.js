@@ -1,6 +1,5 @@
 import React from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-import XLSX from "xlsx";
+import { Button } from "react-bootstrap";
 
 export default class InputFileButton extends React.Component {
   constructor(props) {
@@ -16,23 +15,20 @@ export default class InputFileButton extends React.Component {
   }
 
   handleInputFileChange(files) {
-    var f;
-
-    for (let i = 0, f = files[i]; i != files.length; ++i) {
+    var convertedFiles = [];
+    for (let i = 0, f = files[i]; i !== files.length; ++i) {
       var reader = new FileReader();
-      var name = f.name;
       reader.onload = function(e) {
         var data = e.target.result;
-
-        var workbook = XLSX.read(data, { type: "binary" });
-        console.log(workbook);
-        var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        var data = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 }); //wynik jest tablicą liczb.
-        console.log(data);
-
-        /* DO SOMETHING WITH workbook HERE */
+        convertedFiles[i] = {
+          name: f.name,
+          size: f.size,
+          type: f.type,
+          binaryData: data
+        };
       };
       reader.readAsBinaryString(f);
+      this.props.funkcjaObslugujacaPliki(convertedFiles);
     }
     //alert(`${files[0].name} ${files[0].bytes}`);
   }
@@ -44,8 +40,8 @@ export default class InputFileButton extends React.Component {
           variant={this.props.buttonClass}
           onClick={this.handleButtonClick}
         >
-          Dodaj plik
-        </Button>
+          Dodaj plik{" "}
+        </Button>{" "}
         <input
           type="file"
           name="my_file"
@@ -53,7 +49,7 @@ export default class InputFileButton extends React.Component {
           onChange={e => this.handleInputFileChange(e.target.files)}
           ref={this.fileUpload}
           style={{ visibility: "hidden", display: "none" }}
-        />
+        />{" "}
       </div>
     );
   }

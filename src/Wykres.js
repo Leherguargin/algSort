@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import dane from "./dane";
+// import dane from "./dane";
 
 import {
   LineChart,
@@ -61,10 +61,16 @@ export default class Wykres extends PureComponent {
             stroke="#C8E40F"
             activeDot={{ r: 8 }}
           />
-          {/* <Line type="monotone" dataKey="p" stroke="#82ca9d" /> */}
+          <Line
+            type="monotone"
+            dataKey="bubble_with_flag"
+            stroke="#F3040F"
+            activeDot={{ r: 8 }}
+          />
+          {/* <Line type="monotone" dataKey="merge_sort_time" stroke="#82ca9d" /> */}
         </LineChart>
         <p className="text-white">
-          suma czasu: {this.psumaCzasow(this.props.dane)}
+          suma czasu: {this.psumaCzasow(this.props.dane)} s
         </p>
       </div>
     );

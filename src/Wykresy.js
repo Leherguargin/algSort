@@ -6,26 +6,43 @@ import Navi from "./Navi";
 export default class Wykresy extends React.Component {
   constructor(props) {
     super(props);
+       this.state = {
+         stan: {
+           bubble: true,
+           bubbleFlag: false,
+           quick: false,
+           merge: false
+         }
+       };
+
     this.generujDaneDoWykresu = this.generujDaneDoWykresu.bind(this);
     this.obslugaNawigacji = this.obslugaNawigacji.bind(this);
   }
 
   obslugaNawigacji(e, stan) {
-    console.log(e);
-    console.log(stan);
+    //console.log(e);
+    //console.log(stan);
+    this.setState(this.state = {stan});
+    console.log(this.state);
   }
 
   generujDaneDoWykresu(odIlu, doIlu, coIle) {
     var daneDoWykresu = [];
     var i = 0;
     for (let j = odIlu; j < doIlu; j += coIle) {
+      let tab = Algorytmy.generatorDanychLosowych(j);
       daneDoWykresu[i] = {
         name: j.toString(),
-        bubble_sort_time: Algorytmy.bubbleSort(
-          Algorytmy.generatorDanychLosowych(j)
-        ),
         n: j
       };
+      ///ify XDDDD
+      if(this.state.stan.bubble){
+        daneDoWykresu[i].bubble_sort_time = Algorytmy.bubbleSort(tab);
+      }
+      if(this.state.stan.bubbleFlag){
+        daneDoWykresu[i].bubble_with_flag = Algorytmy.bubbleSortWithFlag(tab);
+      }
+
       i++;
     }
     return daneDoWykresu;

@@ -4,3 +4,33 @@ body {
     /* patern from toptal.com */
     background-image: url("img/dark-honeycomb.png");
 }
+
+.duzyKwadrat {
+    background-color: #333333;
+    color: white;
+    text-shadow: none;
+    width: 210px;
+    height: 210px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid green;
+    float: left;
+}
+
+.malyKwadrat {
+    background-color: #333;
+    width: 69px;
+    height: 69px;
+    border: 1px solid green;
+    float: left;
+}
+
+.znacznikP {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 69px;
+    height: 69px;
+    color: white;
+    font-weight: bold;
+}
