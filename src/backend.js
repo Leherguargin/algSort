@@ -26,7 +26,7 @@ export default class Algorytmy {
     };
 
     static bubbleSort = tab => { //sortowanie bez flagi
-        let czas = Date.now();
+         let czas = Date.now();
          let length = tab.length;
          let arr = [];
          for(let i=0;i<length;i++){
@@ -44,6 +44,72 @@ export default class Algorytmy {
          } while (length > 1);
          czas = Date.now() - czas;
          return czas;
+    }
+
+    static insertionSort = tab => {//mozna zoptymalizować sprawdzanie czy i gdzie w część posortowaną wstawić element
+        let czas = Date.now();
+        let length = tab.length;
+        let arr = [];
+        for(let i=0;i<length;i++){
+            arr[i] = tab[i];
+        }
+
+        for (let i = 1; i < arr.length; i++) {
+            let j = i - 1;
+            let tmp = arr[i];
+            while (j >= 0 && arr[j] > tmp) {  //złożoność przeszukiwania ciągu posortowanego O(n) przy przeszukiwaniu binarnym byłoby O(nlog(n))
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j+1] = tmp;
+        }
+
+        czas = Date.now() - czas;
+        return czas;
+    }
+
+    static selectionSort = tab => {
+        let czas = Date.now();
+        let length = tab.length;
+        let arr = [];
+        for(let i=0;i<length;i++){
+            arr[i] = tab[i];
+        }
+
+        for (let i = 0; i < length; i++) {
+            let min = i;
+            for (let j = i + 1; j < length; j++) {
+                if (arr[min] > arr[j]) {
+                    min = j;
+                }
+            }
+            if (min !== i) {
+                let tmp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = tmp;
+            }
+        }
+
+        czas = Date.now() - czas;
+        return czas;
+    }
+
+    static countingSort = tab => {}
+
+    static heapSort = tab => {}
+
+    static swap = (a, b) => {
+        let temp = a;
+        a = b;
+        b = a;
+    }
+
+    static quickSortRecursve = tab => {
+
+    }
+
+    static quickSortIterative = tab => {
+
     }
 
     static merge = (leftArr, rightArr) => {
