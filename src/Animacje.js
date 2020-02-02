@@ -1,7 +1,7 @@
 import React from "react";
 import "./styleAnimation.css";
-import {gsap} from "gsap";
-import {Row, Col, Button} from "react-bootstrap";
+import { gsap } from "gsap";
+import { Row, Col, Button } from "react-bootstrap";
 
 export default class Animacje extends React.Component {
     constructor(props) {
@@ -31,65 +31,80 @@ export default class Animacje extends React.Component {
     }
 
     render() {
-      const elementy = [0, 1, 2, 3, 4, 5, 6, 7].map((item, index, ) => {
-        return (
-            <div className="element">
-              <p>{this.state.dane[index]}</p>
-            </div>
-        )
-      });
-        return (
-            <main>
-                <Row>
-                    <Col md="2" className="m-3">
-                        <nav>
-                            <div m="2">
-                                <Button
-                                    variant="outline-info"
-                                    onClick={this.bubbleSortAnimation}
-                                    disabled={this.state.sortujDisabled}
-                                    style={{"margin-left": "auto", "margin-right": "auto"}}
-                                >
-                                    Sortuj
-                                </Button>
-                            </div>
-                            <div m="2">
-                                <Button
-                                    variant="outline-info"
-                                    onClick={this.randomValues}
-                                    disabled={this.state.losujDisabled}
-                                >
-                                    Losuj wartości
-                                </Button>
-                            </div>
-                        </nav>
-                    </Col>
-                    <Col
-                        md="10"
-                        style={{"margin-left": "auto", "margin-right": "auto"}}
-                    >
-                        <div class="board">
-                            {elementy}
-                        </div>
-                        <div class="boardTriangle">
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                            <div class="triangle"></div>
-                        </div>
-                    </Col>
-                </Row>
-            </main>
+        const elementy = [0, 1, 2, 3, 4, 5, 6, 7].map((item, index, ) => {
+            return ( <
+                div className = "element" >
+                <
+                p > { this.state.dane[index] } < /p> <
+                /div>
+            )
+        });
+        return ( <
+            main >
+            <
+            Row >
+            <
+            Col md = "2"
+            className = "m-3" >
+            <
+            nav >
+            <
+            div m = "2" >
+            <
+            Button variant = "outline-info"
+            onClick = { this.bubbleSortAnimation }
+            disabled = { this.state.sortujDisabled }
+            style = {
+                { "margin-left": "auto", "margin-right": "auto" } } >
+            Sortuj <
+            /Button> <
+            /div> <
+            div m = "2" >
+            <
+            Button variant = "outline-info"
+            onClick = { this.randomValues }
+            disabled = { this.state.losujDisabled } >
+            Losuj wartości <
+            /Button> <
+            /div> <
+            /nav> <
+            /Col> <
+            Col md = "10"
+            style = {
+                { "margin-left": "auto", "margin-right": "auto" } } >
+            <
+            div class = "board" > { elementy } <
+            /div> <
+            div class = "boardTriangle" >
+            <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            div class = "triangle" > < /div> <
+            /div> <
+            /Col> <
+            /Row> <
+            /main>
         );
+    }
+
+    quickSortAnimation() { //nie dokończone
+        let elements = [];
+        let x = [];
+        for (let i = 0; i < this.tab.length; i++) {
+            elements[i] = this.tab[i];
+            x[i] = 0;
+        }
+
     }
 
     bubbleSortAnimation() {
         //sortowanie rosnąco, działa animacja, sortuje z flagą oraz pomijając juz wybrane minimalne elementy
-        this.setState({losujDisabled: true, sortujDisabled: true});
+        this.setState({ losujDisabled: true, sortujDisabled: true });
         let elements = [];
         let x = [];
         for (let i = 0; i < this.tab.length; i++) {
@@ -102,16 +117,16 @@ export default class Animacje extends React.Component {
             swapped = false;
             for (let i = elements.length - 1; i > n; i--) {
                 this.tl
-                    .to(this.trojkat[i], 1, {opacity: 1})
-                    .to(this.trojkat[i - 1], 1, {opacity: 1}, "-=1")
-                    .to(this.trojkat[i], 1, {opacity: 0})
-                    .to(this.trojkat[i - 1], 1, {opacity: 0}, "-=1");
-                if (elements[i].innerText < elements[i-1].innerText) {
+                    .to(this.trojkat[i], 1, { opacity: 1 })
+                    .to(this.trojkat[i - 1], 1, { opacity: 1 }, "-=1")
+                    .to(this.trojkat[i], 1, { opacity: 0 })
+                    .to(this.trojkat[i - 1], 1, { opacity: 0 }, "-=1");
+                if (elements[i].innerText < elements[i - 1].innerText) {
                     this.tl
-                        .to(elements[i], 1, {x: (x[i] += -67), y: -67})
-                        .to(elements[i - 1], 1, {x: (x[i - 1] += 67), y: 67}, "-=1")
-                        .to(elements[i], 1, {x: (x[i] += -67), y: 0})
-                        .to(elements[i - 1], 1, {x: (x[i - 1] += 67), y: 0}, "-=1");
+                        .to(elements[i], 1, { x: (x[i] += -67), y: -67 })
+                        .to(elements[i - 1], 1, { x: (x[i - 1] += 67), y: 67 }, "-=1")
+                        .to(elements[i], 1, { x: (x[i] += -67), y: 0 })
+                        .to(elements[i - 1], 1, { x: (x[i - 1] += 67), y: 0 }, "-=1");
 
                     const temp = elements[i];
                     elements[i] = elements[i - 1];

@@ -1,13 +1,15 @@
+//https://eduinf.waw.pl/inf/alg/003_sort/m0025.php
+
 export default class Algorytmy {
     static bubbleSortWithFlag = tab => { //sortowanie rosnąco z flagą kończącą gdy nie było zamiany
-        let czas = Date.now();
         //console.time("pomiar");
         let swapped;
         let length = tab.length;
         let arr = [];
-        for(let i=0;i<length;i++){
+        for (let i = 0; i < length; i++) {
             arr[i] = tab[i];
         }
+        let czas = Date.now();
         do {
             swapped = false;
             for (let i = 0; i < length; i++) {
@@ -26,42 +28,42 @@ export default class Algorytmy {
     };
 
     static bubbleSort = tab => { //sortowanie bez flagi
-         let czas = Date.now();
-         let length = tab.length;
-         let arr = [];
-         for(let i=0;i<length;i++){
-             arr[i] = tab[i];
-         }
-         do {
-             for (let i = 0; i < length; i++) {
-                 if (arr[i] > arr[i + 1]) {
-                     let tmp = arr[i];
-                     arr[i] = arr[i + 1];
-                     arr[i + 1] = tmp;
-                 }
-             }
-             length--;
-         } while (length > 1);
-         czas = Date.now() - czas;
-         return czas;
-    }
-
-    static insertionSort = tab => {//mozna zoptymalizować sprawdzanie czy i gdzie w część posortowaną wstawić element
-        let czas = Date.now();
         let length = tab.length;
         let arr = [];
-        for(let i=0;i<length;i++){
+        for (let i = 0; i < length; i++) {
             arr[i] = tab[i];
         }
+        let czas = Date.now();
+        do {
+            for (let i = 0; i < length; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    let tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                }
+            }
+            length--;
+        } while (length > 1);
+        czas = Date.now() - czas;
+        return czas;
+    }
+
+    static insertionSort = tab => { //mozna zoptymalizować sprawdzanie czy i gdzie w część posortowaną wstawić element
+        let length = tab.length;
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+            arr[i] = tab[i];
+        }
+        let czas = Date.now();
 
         for (let i = 1; i < arr.length; i++) {
             let j = i - 1;
             let tmp = arr[i];
-            while (j >= 0 && arr[j] > tmp) {  //złożoność przeszukiwania ciągu posortowanego O(n) przy przeszukiwaniu binarnym byłoby O(nlog(n))
+            while (j >= 0 && arr[j] > tmp) { //złożoność przeszukiwania ciągu posortowanego O(n) przy przeszukiwaniu binarnym byłoby O(nlog(n))
                 arr[j + 1] = arr[j];
                 j--;
             }
-            arr[j+1] = tmp;
+            arr[j + 1] = tmp;
         }
 
         czas = Date.now() - czas;
@@ -69,12 +71,12 @@ export default class Algorytmy {
     }
 
     static selectionSort = tab => {
-        let czas = Date.now();
         let length = tab.length;
         let arr = [];
-        for(let i=0;i<length;i++){
+        for (let i = 0; i < length; i++) {
             arr[i] = tab[i];
         }
+        let czas = Date.now();
 
         for (let i = 0; i < length; i++) {
             let min = i;
@@ -98,14 +100,54 @@ export default class Algorytmy {
 
     static heapSort = tab => {}
 
-    static swap = (a, b) => {
-        let temp = a;
-        a = b;
-        b = a;
+    static partition = (arr, low, high) => {
+        let pivot = arr[high];
+        let i = (low - 1); // index of smaller element
+        for (let j = low; j <= high - 1; j++) {
+            // If current element is smaller than or
+            // equal to pivot
+            if (arr[j] <= pivot) {
+                i++;
+                // swap arr[i] and arr[j]
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        let temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
     }
 
-    static quickSortRecursve = tab => {
+    static quickSortRecursve1 = (tab) => {
+        let arr = [];
+        for (let i = 0; i < tab.length; i++) {
+            arr[i] = tab[i];
+        }
+        let czas = Date.now();
+        Algorytmy.quickSortRecursve(arr, 0, arr.length - 1);
+        for (let i = 0; i < 1000; i++) {
+            //console.log("napis opozniajacy");
+        }
+        czas = Date.now() - czas;
+        return czas;
+    }
 
+    static quickSortRecursve = (arr, low, high) => {
+        if (low < high) {
+            /* pi is partitioning index, arr[pi] is 
+            now at right place */
+            let pi = Algorytmy.partition(arr, low, high);
+
+            // Recursively sort elements before 
+            // partition and after partition 
+            Algorytmy.quickSortRecursve(arr, low, pi - 1);
+            Algorytmy.quickSortRecursve(arr, pi + 1, high);
+        }
     }
 
     static quickSortIterative = tab => {
