@@ -6,12 +6,12 @@ export default class Wykresy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      wyswietlaneAlgorytmy: [true, false, false, false],
+      wyswietlaneAlgorytmy: [false, false, true, false],
       dostepneAlgorytmy: [
         "bubbleSort",
         "bubbleFlag",
         "recursiveQuickSort",
-        "iterativeQuickSort"
+        "selectionSort"
       ],
       odIlu: 1000,
       doIlu: 5001,
@@ -24,11 +24,11 @@ export default class Wykresy extends React.Component {
   }
 
   obslugaNawigacji(e, algorytmy) {
-    this.setState((this.state = { algorytmy }));
+    this.setState({ algorytmy });
     //console.log(this.state);
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     fetch("http://inzmlback.herokuapp.com/sort/quick-sort", {
       //localhost:8091/sort/quick-sort
       method: "POST",
@@ -46,9 +46,7 @@ export default class Wykresy extends React.Component {
     })
       .then(res => res.json())
       .then(myJson => {
-        let dane = JSON.stringify(myJson);
-        console.log(dane);
-        return dane;
+        this.state.daneDoWykresu = myJson;
       });
   }
 

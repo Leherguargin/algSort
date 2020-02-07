@@ -12,31 +12,12 @@ import {
 export default class Wykres extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
 
-  constructor(props) {
-    super(props);
-    //this.renderColorfulLegendText = this.renderColorfulLegendText.bind(this);
-  }
-
   renderColorfulLegendText(value, entry) {
     const { color } = entry;
-
     return <span style={{ color }}>{value}</span>;
   }
 
   render() {
-    let lines;
-    this.props.jakieAlgorytmy.map((element, index, arr) => {
-      if (this.props.wyswietlaneAlgorytmy[index]) {
-        lines += (
-          <Line
-            type="monotone"
-            dataKey={element}
-            stroke="#C8E40F" //uzaleznij kolor od indexu moze... xD
-            activeDot={{ r: 8 }}
-          />
-        );
-      }
-    });
     return (
       <div>
         <LineChart
@@ -50,12 +31,20 @@ export default class Wykres extends PureComponent {
             bottom: 5
           }}
         >
+          {console.log(this.props.dane)}
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend stroke="#C8E40F" formatter={this.renderColorfulLegendText} />
-          {lines}
+          {this.props.wyswietlaneAlgorytmy[2] && (
+            <Line
+              type="monotone"
+              dataKey={this.props.jakieAlgorytmy[2]}
+              stroke="#C8E40F"
+              activeDot={{ r: 8 }}
+            />
+          )}
         </LineChart>
       </div>
     );
