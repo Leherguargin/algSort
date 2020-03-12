@@ -51,19 +51,19 @@ export default class Animacje extends React.Component {
                   style={{ "margin-left": "auto", "margin-right": "auto" }}
                 >
                   Sortuj{" "}
-                </Button>{" "}
-              </div>{" "}
+                </Button>
+              </div>
               <div m="2">
                 <Button
                   variant="outline-info"
                   onClick={this.randomValues}
                   disabled={this.state.losujDisabled}
                 >
-                  Losuj wartości{" "}
-                </Button>{" "}
-              </div>{" "}
-            </nav>{" "}
-          </Col>{" "}
+                  Losuj wartości
+                </Button>
+              </div>
+            </nav>
+          </Col>
           <Col
             md="10"
             style={{ "margin-left": "auto", "margin-right": "auto" }}
@@ -130,7 +130,14 @@ export default class Animacje extends React.Component {
       }
       n++;
     } while (swapped);
-    //this.setState({ losujDisabled: false });
+    console.log(this.tl.totalDuration());
+    //this.setState({ losujDisabled: false, sortujDisabled: false });
+    window.setTimeout(() => {
+      this.setState({
+        losujDisabled: false,
+        sortujDisabled: false
+      });
+    }, this.tl.totalDuration() * 1000);
   }
 
   randomValues() {
