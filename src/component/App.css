@@ -2,7 +2,7 @@ html,
 body {
     /* height: 100%; */
     /* patern from toptal.com */
-    background-image: url("img/dark-honeycomb.png");
+    background-image: url("../img/dark-honeycomb.png");
 }
 
 .duzyKwadrat {

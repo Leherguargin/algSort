@@ -4,11 +4,11 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Wykresy from "./Wykresy";
-import NavBarr from "./Navbarr";
-import Ciasteczko from "./Cookies";
-import Animacje from "./Animacje";
-import MaterialDesignTesting from "./MaterialDesignTesting";
+import Wykresy from "./wykresy/Wykresy";
+import NavBarr from "./navbar/Navbarr";
+import Ciasteczko from "./cookies/Cookies";
+import Animacje from "./animacje/Animacje";
+import MaterialDesignTesting from "./materialDesignTesting/MaterialDesignTesting";
 import { Row, Col } from "react-bootstrap";
 
 function App() {

@@ -50,7 +50,7 @@ export default class Animacje extends React.Component {
                   disabled={this.state.sortujDisabled}
                   style={{ "margin-left": "auto", "margin-right": "auto" }}
                 >
-                  Sortuj{" "}
+                  Sortuj
                 </Button>
               </div>
               <div m="2">
@@ -68,15 +68,15 @@ export default class Animacje extends React.Component {
             md="10"
             style={{ "margin-left": "auto", "margin-right": "auto" }}
           >
-            <div class="board"> {elementy} </div>{" "}
-            <div class="boardTriangle">
-              <div class="triangle"> </div> <div class="triangle"> </div>{" "}
-              <div class="triangle"> </div> <div class="triangle"> </div>{" "}
-              <div class="triangle"> </div> <div class="triangle"> </div>{" "}
-              <div class="triangle"> </div> <div class="triangle"> </div>{" "}
-            </div>{" "}
-          </Col>{" "}
-        </Row>{" "}
+            <div className="board"> {elementy} </div>{" "}
+            <div className="boardTriangle">
+              <div className="triangle"> </div> <div className="triangle"> </div>
+              <div className="triangle"> </div> <div className="triangle"> </div>
+              <div className="triangle"> </div> <div className="triangle"> </div>
+              <div className="triangle"> </div> <div className="triangle"> </div>
+            </div>
+          </Col>
+        </Row>
       </main>
     );
   }
