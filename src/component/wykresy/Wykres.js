@@ -33,7 +33,7 @@ export default class Wykres extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="x" />
+          <XAxis dataKey="iloscElementowSortoweanejTAblicy" />
           <YAxis />
           <Tooltip />
           <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
@@ -42,7 +42,7 @@ export default class Wykres extends PureComponent {
               return (
                 <Line
                   type="monotone"
-                  dataKey={this.props.jakieAlgorytmy[index]}
+                  dataKey="czasPracyAlgorytmu"
                   stroke={this.kolorki[index]}
                   activeDot={{ r: 8 }}
                   key={index}

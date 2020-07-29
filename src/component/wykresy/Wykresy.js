@@ -12,10 +12,10 @@ export default class Wykresy extends React.Component {
       isLoaded: false,
       error: null,
       wyswietlaneAlgorytmy: [false, false],
-      dostepneAlgorytmy: ["quickSort", "selectionSort"],
+      dostepneAlgorytmy: ["QuickSort", "SelectionSort"],
       odIlu: 10000,
       doIlu: 50001,
-      iloscDanych: 40,
+      coIle: 1000,
       daneDoWykresu: [],
     };
 
@@ -64,7 +64,7 @@ export default class Wykresy extends React.Component {
         }),
         odIlu: this.state.odIlu,
         doIlu: this.state.doIlu,
-        iloscDanych: this.state.iloscDanych,
+        coIle: this.state.coIle,
         jakieDane: "losowe",
       }),
     })

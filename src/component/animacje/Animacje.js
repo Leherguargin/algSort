@@ -16,7 +16,7 @@ export default class Animacje extends React.Component {
     this.state = {
       sortujDisabled: false,
       losujDisabled: false,
-      dane: tablicaDanych
+      dane: tablicaDanych,
     };
     this.bubbleSortAnimation = this.bubbleSortAnimation.bind(this);
     this.randomValues = this.randomValues.bind(this);
@@ -33,7 +33,7 @@ export default class Animacje extends React.Component {
   render() {
     const elementy = [0, 1, 2, 3, 4, 5, 6, 7].map((item, index) => {
       return (
-        <div className="element">
+        <div className="element" key={index}>
           <p> {this.state.dane[index]} </p>
         </div>
       );
@@ -48,7 +48,7 @@ export default class Animacje extends React.Component {
                   variant="outline-info"
                   onClick={this.bubbleSortAnimation}
                   disabled={this.state.sortujDisabled}
-                  style={{ "margin-left": "auto", "margin-right": "auto" }}
+                  style={{ marginLeft: "auto", marginRight: "auto" }}
                 >
                   Sortuj
                 </Button>
@@ -70,10 +70,14 @@ export default class Animacje extends React.Component {
           >
             <div className="board"> {elementy} </div>{" "}
             <div className="boardTriangle">
-              <div className="triangle"> </div> <div className="triangle"> </div>
-              <div className="triangle"> </div> <div className="triangle"> </div>
-              <div className="triangle"> </div> <div className="triangle"> </div>
-              <div className="triangle"> </div> <div className="triangle"> </div>
+              <div className="triangle"> </div>{" "}
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>{" "}
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>{" "}
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>{" "}
+              <div className="triangle"> </div>
             </div>
           </Col>
         </Row>
@@ -135,7 +139,7 @@ export default class Animacje extends React.Component {
     window.setTimeout(() => {
       this.setState({
         losujDisabled: false,
-        sortujDisabled: false
+        sortujDisabled: false,
       });
     }, this.tl.totalDuration() * 1000);
   }
