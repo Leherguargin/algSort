@@ -68,15 +68,15 @@ export default class Animacje extends React.Component {
             md="10"
             style={{ "margin-left": "auto", "margin-right": "auto" }}
           >
-            <div className="board"> {elementy} </div>{" "}
+            <div className="board"> {elementy} </div>
             <div className="boardTriangle">
-              <div className="triangle"> </div>{" "}
               <div className="triangle"> </div>
-              <div className="triangle"> </div>{" "}
               <div className="triangle"> </div>
-              <div className="triangle"> </div>{" "}
               <div className="triangle"> </div>
-              <div className="triangle"> </div>{" "}
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>
+              <div className="triangle"> </div>
               <div className="triangle"> </div>
             </div>
           </Col>

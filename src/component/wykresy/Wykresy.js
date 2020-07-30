@@ -12,10 +12,10 @@ export default class Wykresy extends React.Component {
       isLoaded: false,
       error: null,
       wyswietlaneAlgorytmy: [false, false],
-      dostepneAlgorytmy: ["QuickSort", "SelectionSort"],
-      odIlu: 10000,
-      doIlu: 50001,
-      coIle: 1000,
+      dostepneAlgorytmy: ["quickSort", "selectionSort"],
+      odIlu: 1000,
+      doIlu: 5001,
+      coIle: 100,
       daneDoWykresu: [],
     };
 

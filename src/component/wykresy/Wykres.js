@@ -42,7 +42,7 @@ export default class Wykres extends PureComponent {
               return (
                 <Line
                   type="monotone"
-                  dataKey="czasPracyAlgorytmu"
+                  dataKey={this.props.jakieAlgorytmy[index]}
                   stroke={this.kolorki[index]}
                   activeDot={{ r: 8 }}
                   key={index}
