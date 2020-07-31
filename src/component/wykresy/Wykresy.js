@@ -52,7 +52,7 @@ export default class Wykresy extends React.Component {
 
     componentDidMount() {
         fetch("https://00a0a2680ba9.ngrok.io/sort", {
-                //http://inzmlback.herokuapp.com/sort
+                ////http://inzmlback.herokuapp.com/sort
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -153,7 +153,7 @@ export default class Wykresy extends React.Component {
             onClick = { this.handleSubmit } >
                 Zastosuj <
                 /Button> < /
-                Form > <
+            Form > <
                 div className = "m-3" >
                 <
                 legend className = "text-white" > Z pliku excel < /legend> <
@@ -162,7 +162,7 @@ export default class Wykresy extends React.Component {
             /> < /
             div > <
                 /div> < /
-                nav >
+            nav >
 
                 { wykresik }
 
@@ -170,7 +170,7 @@ export default class Wykresy extends React.Component {
             footer className = "col-md-12" / >
                 <
                 /div> < /
-                div >
+            div >
         );
     }
 }
