@@ -15,7 +15,7 @@ export default class Wykres extends PureComponent {
 
   renderColorfulLegendText(value, entry) {
     const { color } = entry;
-    return <span style={{ color }}>{value}</span>;
+    return <span style={{ color }}> {value} </span>;
   }
 
   render() {
@@ -36,9 +36,15 @@ export default class Wykres extends PureComponent {
           <XAxis dataKey="iloscElementowSortoweanejTAblicy" />
           <YAxis />
           <Tooltip />
-          <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
-          {this.props.wyswietlaneAlgorytmy.map((el, index, array) => {
-            if (el) {
+          <Legend
+            stroke="#000000"
+            formatter={this.renderColorfulLegendText}
+          />{" "}
+          {this.props.wyswietlaneAlgorytmy
+            .filter((el, index, array) => {
+              return el;
+            })
+            .map((el, index, array) => {
               return (
                 <Line
                   type="monotone"
@@ -48,8 +54,7 @@ export default class Wykres extends PureComponent {
                   key={index}
                 />
               );
-            }
-          })}
+            })}
         </LineChart>
       </div>
     );
