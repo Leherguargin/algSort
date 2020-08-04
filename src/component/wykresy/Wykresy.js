@@ -15,7 +15,7 @@ export default class Wykresy extends React.Component {
       dostepneAlgorytmy: ["quickSort", "selectionSort"],
       odIlu: 1000,
       doIlu: 5001,
-      coIle: 100,
+      coIle: 1000,
       daneDoWykresu: [],
     };
 
@@ -51,8 +51,8 @@ export default class Wykresy extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://inzmlback.herokuapp.com/sort", {
-      ////http://inzmlback.herokuapp.com/sort
+    fetch("http://localhost:8080/sort", {
+      //https://inzmlback.herokuapp.com/sort
       method: "POST",
       headers: {
         Accept: "application/json",

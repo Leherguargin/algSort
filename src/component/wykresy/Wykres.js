@@ -36,15 +36,14 @@ export default class Wykres extends PureComponent {
           <XAxis dataKey="iloscElementowSortoweanejTAblicy" />
           <YAxis />
           <Tooltip />
-          <Legend
-            stroke="#000000"
-            formatter={this.renderColorfulLegendText}
-          />{" "}
-          {this.props.wyswietlaneAlgorytmy
-            .filter((el, index, array) => {
+          <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
+          {console.log(
+            this.props.wyswietlaneAlgorytmy.filter((el, index, array) => {
               return el;
             })
-            .map((el, index, array) => {
+          )}
+          {this.props.wyswietlaneAlgorytmy.map((el, index, array) => {
+            if (el) {
               return (
                 <Line
                   type="monotone"
@@ -54,7 +53,10 @@ export default class Wykres extends PureComponent {
                   key={index}
                 />
               );
-            })}
+            } else {
+              return null;
+            }
+          })}
         </LineChart>
       </div>
     );
