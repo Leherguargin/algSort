@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Label,
 } from "recharts";
 
 export default class Wykres extends PureComponent {
@@ -33,8 +34,12 @@ export default class Wykres extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="iloscElementowSortoweanejTAblicy" />
-          <YAxis />
+          <XAxis dataKey="iloscElementowSortoweanejTAblicy">
+            <Label value="liczba elementów" offset={0} position="insideBottom" fill={'white'} />
+          </XAxis>
+          <YAxis>
+            <Label value="czas sortowania" offset={0} position="left" angle="-90" fill={'white'} />
+          </YAxis>
           <Tooltip />
           <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
           {console.log(

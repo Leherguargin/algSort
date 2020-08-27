@@ -13,8 +13,8 @@ export default class Wykresy extends React.Component {
             error: null,
             wyswietlaneAlgorytmy: [false, false],
             dostepneAlgorytmy: ["quickSort", "selectionSort"],
-            odIlu: 1000,
-            doIlu: 5001,
+            odIlu: 0,
+            doIlu: 7001,
             coIle: 1000,
             daneDoWykresu: [],
         };
@@ -96,8 +96,9 @@ export default class Wykresy extends React.Component {
                 section className = "col-md-10" >
                 <
                 div style = {
-                    { color: "white" } } > Ładowanie... < /div>{" "} <
-                /section>
+                    { color: "white" }
+                } > Ładowanie... < /div>{" "} < /
+                section >
             );
             if (
                 isLoaded &&
@@ -108,29 +109,31 @@ export default class Wykresy extends React.Component {
                     section className = "col-md-10" >
                     <
                     Wykres szerokoscWykresu = {
-                        (8 / 12) * window.innerWidth }
+                        (8 / 12) * window.innerWidth
+                    }
                     wysokoscWykresu = {
-                        (8 / 12) * window.innerHeight }
+                        (8 / 12) * window.innerHeight
+                    }
                     dane = { this.state.daneDoWykresu }
                     jakieAlgorytmy = { this.state.dostepneAlgorytmy }
                     wyswietlaneAlgorytmy = { this.state.wyswietlaneAlgorytmy }
-                    />{" "} <
-                    /section>
+                    />{" "} < /
+                    section >
                 );
             }
 
             return ( <
-                div >
-                <
-                div className = "row" >
-                <
-                nav className = "col-md-2" >
-                <
-                div className = "m-3" >
-                <
-                Form className = "m-3" >
-                <
-                legend className = "text-white" > Algorytmy < /legend>{" "} {
+                    div >
+                    <
+                    div className = "row" >
+                    <
+                    nav className = "col-md-2" >
+                    <
+                    div className = "m-3" >
+                    <
+                    Form className = "m-3" >
+                    <
+                    legend className = "text-white" > Algorytmy < /legend>{" "} {
                     this.state.dostepneAlgorytmy.map((element, index, arr) => ( <
                         div key = { index }
                         className = "m-3" >
@@ -141,34 +144,34 @@ export default class Wykresy extends React.Component {
                         className = "text-white m-1"
                         onChange = { this.handleInputChange }
                         value = { this.state.wyswietlaneAlgorytmy[index] }
-                        />{" "} <
-                        /div>
+                        />{" "} < /
+                        div >
                     ))
                 } { " " } <
                 Button type = "button"
-                variant = "outline-info"
-                onClick = { this.handleSubmit } >
+            variant = "outline-info"
+            onClick = { this.handleSubmit } >
                 Zastosuj { " " } <
-                /Button>{" "} <
-                /Form>{" "} <
+                /Button>{" "} < /
+            Form > { " " } <
                 div className = "m-3" >
                 <
                 legend className = "text-white" > Z pliku excel < /legend>{" "} <
-                InputFileButton buttonClass = "outline-info"
-                funkcjaObslugujacaPliki = { this.obslugaExcela }
-                />{" "} <
-                /div>{" "} <
-                /div>{" "} <
-                /nav>
+            InputFileButton buttonClass = "outline-info"
+            funkcjaObslugujacaPliki = { this.obslugaExcela }
+            />{" "} < /
+            div > { " " } <
+                /div>{" "} < /
+            nav >
 
                 { wykresik }
 
+            <
+            footer className = "col-md-12" / >
                 <
-                footer className = "col-md-12" / >
-                <
-                /div>{" "} <
-                /div>
-            );
-        }
+                /div>{" "} < /
+            div >
+        );
     }
+}
 }
