@@ -12,7 +12,7 @@ import {
 
 export default class Wykres extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
-  kolorki = ["#fff200", "#ff0000", "#00ff15", "#ff00ea"];
+  kolorki = ["#fff200", "#ff0000", "#00ff15", "#ff00ea", "#211aec", "#ec6f10"];
 
   renderColorfulLegendText(value, entry) {
     const { color } = entry;
@@ -35,18 +35,24 @@ export default class Wykres extends PureComponent {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="iloscElementowSortoweanejTAblicy">
-            <Label value="liczba elementów" offset={0} position="insideBottom" fill={'white'} />
+            <Label
+              value="liczba elementów"
+              offset={0}
+              position="insideBottom"
+              fill={"white"}
+            />
           </XAxis>
           <YAxis>
-            <Label value="czas sortowania" offset={0} position="left" angle="-90" fill={'white'} />
+            <Label
+              value="czas sortowania [ns]"
+              offset={0}
+              position="left"
+              angle="-90"
+              fill={"white"}
+            />
           </YAxis>
           <Tooltip />
           <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
-          {console.log(
-            this.props.wyswietlaneAlgorytmy.filter((el, index, array) => {
-              return el;
-            })
-          )}
           {this.props.wyswietlaneAlgorytmy.map((el, index, array) => {
             if (el) {
               return (
