@@ -6,8 +6,8 @@ import XLSX from "xlsx";
 import InputFileButton from "../InputFileButton";
 
 export default class Wykresy extends React.Component {
-  //backendAdress = "http://localhost:8080/sort";
-  backendAdress = "https://inzmlback.herokuapp.com/sort";
+  backendAdress = "http://localhost:8080/sort";
+  //backendAdress = "https://inzmlback.herokuapp.com/sort";
 
   constructor(props) {
     super(props);
@@ -48,17 +48,19 @@ export default class Wykresy extends React.Component {
   }
 
   obslugaExcela(plik) {
-    if (
-      plik.type ===
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    ) {
-      var workbook = XLSX.read(plik.data, { type: "binary" });
-      var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      var dataXLSX = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 }); //wynik jest tablicą liczb.
-      plik["dataXLSX"] = dataXLSX; //nie działa, nie wiem czemu
-    }
+    console.log(plik);
 
-    this.props.danePowrotne(plik, this.state);
+    // if (
+    //   plik[0].type ===
+    //   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    // ) {
+    //var workbook = XLSX.read(plik.data, { type: "binary" });
+    //var first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    //var dataXLSX = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 }); //wynik jest tablicą liczb.
+
+    //plik["dataXLSX"] = dataXLSX; //nie działa, nie wiem czemu
+    //}
+    //this.props.danePowrotne(plik, this.state);
   }
 
   componentDidMount() {

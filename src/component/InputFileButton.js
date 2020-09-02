@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import XLSX from "xlsx";
 
 export default class InputFileButton extends React.Component {
   constructor(props) {
@@ -15,22 +16,20 @@ export default class InputFileButton extends React.Component {
   }
 
   handleInputFileChange(files) {
-    var convertedFiles = [];
-    for (let i = 0, f = files[i]; i !== files.length; ++i) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        var data = e.target.result;
-        convertedFiles[i] = {
-          name: f.name,
-          size: f.size,
-          type: f.type,
-          binaryData: data
-        };
-      };
-      reader.readAsBinaryString(f);
-      this.props.funkcjaObslugujacaPliki(convertedFiles);
-    }
-    //alert(`${files[0].name} ${files[0].bytes}`);
+    var reader = new FileReader();
+    var xd = [];
+    reader.onload = function () {
+      var fileData = reader.result;
+      var wb = XLSX.read(fileData, { type: "binary" });
+      wb.SheetNames.forEach(function (sheetName) {
+        var rowObj = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+        var jsonObj = JSON.stringify(rowObj);
+        xd = jsonObj;
+      });
+    };
+    reader.readAsBinaryString(files[0]);
+
+    this.props.funkcjaObslugujacaPliki(xd);
   }
 
   render() {
@@ -45,8 +44,8 @@ export default class InputFileButton extends React.Component {
         <input
           type="file"
           name="my_file"
-          accept="plik/xlsx" //to niestety chyba nie działą...
-          onChange={e => this.handleInputFileChange(e.target.files)}
+          //accept="plik/xlsx" //to niestety chyba nie działą...
+          onChange={(e) => this.handleInputFileChange(e.target.files)}
           ref={this.fileUpload}
           style={{ visibility: "hidden", display: "none" }}
         />{" "}
