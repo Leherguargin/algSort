@@ -6,6 +6,9 @@ export default class InputFileButton extends React.Component {
   constructor(props) {
     super(props);
     this.fileUpload = React.createRef();
+    this.state = {
+      jsonObj: {},
+    };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleInputFileChange = this.handleInputFileChange.bind(this);
@@ -17,19 +20,18 @@ export default class InputFileButton extends React.Component {
 
   handleInputFileChange(files) {
     var reader = new FileReader();
-    var xd = [];
-    reader.onload = function () {
+    reader.onload = () => {
       var fileData = reader.result;
       var wb = XLSX.read(fileData, { type: "binary" });
-      wb.SheetNames.forEach(function (sheetName) {
+      wb.SheetNames.forEach((sheetName) => {
         var rowObj = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
         var jsonObj = JSON.stringify(rowObj);
-        xd = jsonObj;
+        this.setState({ jsonObj: jsonObj });
       });
     };
     reader.readAsBinaryString(files[0]);
 
-    this.props.funkcjaObslugujacaPliki(xd);
+    this.props.funkcjaObslugujacaPliki(this.state.jsonObj);
   }
 
   render() {
@@ -39,8 +41,8 @@ export default class InputFileButton extends React.Component {
           variant={this.props.buttonClass}
           onClick={this.handleButtonClick}
         >
-          Dodaj plik{" "}
-        </Button>{" "}
+          Dodaj plik
+        </Button>
         <input
           type="file"
           name="my_file"
@@ -48,7 +50,7 @@ export default class InputFileButton extends React.Component {
           onChange={(e) => this.handleInputFileChange(e.target.files)}
           ref={this.fileUpload}
           style={{ visibility: "hidden", display: "none" }}
-        />{" "}
+        />
       </div>
     );
   }

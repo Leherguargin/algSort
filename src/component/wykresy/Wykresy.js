@@ -6,8 +6,8 @@ import XLSX from "xlsx";
 import InputFileButton from "../InputFileButton";
 
 export default class Wykresy extends React.Component {
-  backendAdress = "http://localhost:8080/sort";
-  //backendAdress = "https://inzmlback.herokuapp.com/sort";
+  //backendAdress = "http://localhost:8080/sort";
+  backendAdress = "https://inzmlback.herokuapp.com/sort";
 
   constructor(props) {
     super(props);
