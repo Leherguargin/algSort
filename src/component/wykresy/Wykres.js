@@ -47,7 +47,7 @@ export default class Wykres extends PureComponent {
               value="czas sortowania [ns]"
               offset={0}
               position="left"
-              angle="-90"
+              angle={-90}
               fill={"white"}
             />
           </YAxis>

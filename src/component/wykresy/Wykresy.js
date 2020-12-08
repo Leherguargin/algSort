@@ -49,6 +49,7 @@ export default class Wykresy extends React.Component {
 
   obslugaExcela(plik) {
     console.log(plik);
+    // plik.
 
     // if (
     //   plik[0].type ===

@@ -30,7 +30,7 @@ export default class InputFileButton extends React.Component {
       });
     };
     reader.readAsBinaryString(files[0]);
-
+    console.log(this.state.jsonObj);
     this.props.funkcjaObslugujacaPliki(this.state.jsonObj);
   }
 
