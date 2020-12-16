@@ -13,9 +13,18 @@ export default class Animacje extends React.Component {
     this.trojkat = null;
     this.primaryColor = "#209781";
     let tablicaDanych = [];
-    for (let i = 0; i < 8; i++) {
-      tablicaDanych[i] = 8 - i;
-    }
+    // for (let i = 0; i < 8; i++) {//dane od 8 do 0
+    //   tablicaDanych[i] = 8 - i;
+    // }
+    //dane na sztywno
+    tablicaDanych[0] = 3;
+    tablicaDanych[1] = 1;
+    tablicaDanych[2] = 9;
+    tablicaDanych[3] = 6;
+    tablicaDanych[4] = 7;
+    tablicaDanych[5] = 0;
+    tablicaDanych[6] = 2;
+    tablicaDanych[7] = 4;
     this.state = {
       sortujDisabled: false,
       losujDisabled: false,
@@ -28,13 +37,20 @@ export default class Animacje extends React.Component {
         { value: "mergeSort", label: "mergeSort" },
         { value: "heapSort", label: "heapSort" },
       ],
-      wybranyAlgorytm: "selectionSort",
-      opisDzialaniaAlgorytmu: opisyAlgorytmow["selectionSort"],
+      wybranyAlgorytm: "quickSort",
+      opisDzialaniaAlgorytmu: opisyAlgorytmow["quickSort"],
     };
-    this.wybranyAlgorytm = "selectionSort";
-    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["selectionSort"];
+    this.wybranyAlgorytm = "quickSort";
+    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["quickSort"];
+    this.quickSortNowa = 0;
+    this.color = ["yellow", "pink", "purple", "gray", "orange", "cyan"];
+
     this.bubbleSortAnimation = this.bubbleSortAnimation.bind(this);
     this.randomValues = this.randomValues.bind(this);
+    this.swap = this.swap.bind(this);
+    this.partition = this.partition.bind(this);
+    this.quickSort = this.quickSort.bind(this);
+    // this.quickSort2 = this.quickSort2.bind(this);
   }
 
   componentDidMount() {
@@ -158,14 +174,128 @@ export default class Animacje extends React.Component {
   }
 
   quickSortAnimation() {
-    //TODO dokincz metode
-    alert("sortujemy quicksortem");
     let elements = [];
     let x = [];
     for (let i = 0; i < this.tab.length; i++) {
       elements[i] = this.tab[i];
-      x[i] = 0;
+      x[i] = 134 * i;
     }
+    //Start sortowania
+
+    console.log(elements.map((e) => e.innerText));
+    // let resoult = this.quickSort(elements, x, 0, elements.length - 1);
+
+    this.quickSort(elements, x, 0, elements.length - 1);
+    console.log(elements.map((e) => e.innerText));
+  }
+
+  swap(items, x, leftIndex, rightIndex) {
+    this.tl
+      .to(items[leftIndex], { duration: 1, y: "-=135" }) //podniesienie do gory
+      .to(items[rightIndex], { duration: 1, y: "-=135" }, "-=1")
+      .to(items[leftIndex], {
+        duration: 1,
+        x: `+=${x[rightIndex] - x[leftIndex]}`,
+      })
+      .to(
+        items[rightIndex],
+        { duration: 1, x: `+=${x[leftIndex] - x[rightIndex]}` },
+        "-=1"
+      )
+      .to(items[leftIndex], { duration: 1, y: "+=135" }) //opuszczenie
+      .to(items[rightIndex], { duration: 1, y: "+=135" }, "-=1");
+
+    let temp = items[leftIndex];
+    items[leftIndex] = items[rightIndex];
+    items[rightIndex] = temp;
+  }
+
+  partition(items, x, left, right) {
+    let pivot = items[Math.floor((right + left) / 2)],
+      i = left, //left pointer
+      j = right; //right pointer
+
+    //malujemy pivot na czerowny
+    this.tl.to(pivot, {
+      duration: 1,
+      backgroundColor: "red",
+    });
+    while (i <= j) {
+      //left na pierwszy element
+      this.tl
+        .to(this.trojkat[i], { duration: 0, borderBottomColor: "#f34a53" })
+        .to(this.trojkat[i], { duration: 1, opacity: 1 });
+
+      //szukamy mniejszego od pivota od początku tablicy (od lewej)
+      while (items[i].innerText < pivot.innerText) {
+        i++;
+        this.tl
+          .to(this.trojkat[i], { duration: 0, borderBottomColor: "#f34a53" })
+          .to(this.trojkat[i], { duration: 1, opacity: 1 })
+          .to(this.trojkat[i - 1], { duration: 1, opacity: 0 }, "-=1");
+      }
+
+      //right na ostatni element
+      this.tl
+        .to(this.trojkat[j], { duration: 0, borderBottomColor: "blue" })
+        .to(this.trojkat[j], {
+          duration: 1,
+          opacity: 1,
+        });
+
+      //szukamy większego od pivota od konca tablicy (od prawej)
+      while (items[j].innerText > pivot.innerText) {
+        j--;
+        this.tl
+          .to(this.trojkat[j], { duration: 0, borderBottomColor: "blue" })
+          .to(this.trojkat[j], {
+            duration: 1,
+            opacity: 1,
+          })
+          .to(this.trojkat[j + 1], { duration: 1, opacity: 0 }, "-=1");
+      }
+      this.tl
+        .to(this.trojkat[j], { duration: 1, opacity: 0 })
+        .to(this.trojkat[i], { duration: 1, opacity: 0 }, "-=1");
+      if (i <= j) {
+        this.swap(items, x, i, j);
+        i++;
+        j--;
+      }
+    }
+    //zmiana koloru pivota
+    this.tl.to(pivot, {
+      duration: 0,
+      backgroundColor: this.primaryColor,
+    });
+
+    return i;
+  }
+
+  quickSort(items, x, left, right) {
+    let index;
+    if (items.length > 1) {
+      index = this.partition(items, x, left, right);
+      if (left < index - 1) {
+        //podział na podtablice (zmiana koloru)
+        for (let i = left; i < index; i++) {
+          this.tl.to(items[i], {
+            duration: 0,
+            borderColor: this.color[this.quickSortNowa],
+          });
+        }
+        if (this.quickSortNowa >= this.color.length) {
+          this.quickSortNowa = -1;
+        }
+        this.quickSortNowa++;
+
+        this.quickSort(items, x, left, index - 1);
+      }
+      if (index < right) {
+        this.quickSort(items, x, index, right);
+      }
+    }
+    return items;
   }
 
   mergeSortAnimation() {
