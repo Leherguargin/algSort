@@ -7,6 +7,10 @@ main {
   box-sizing: border-box;
 }
 
+.element p {
+  color: black;
+}
+
 .select {
   margin: 10px auto 0;
   width: 300px;

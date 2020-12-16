@@ -12,12 +12,18 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="container">
-        {/* <button onClick={this.animate}>animuj</button>
-        <div className="kwadrat"></div>
-        <div className="kwadrat"></div>
-        <div className="kwadrat">
-          <p id="konsola"></p>
-        </div> */}
+        <h1 className="tytul">
+          Platforma do analizy złożoności obliczeniowej algorytmów sortowania
+        </h1>
+        <p className="opis">
+          <a href="/wykres">Wykresy</a> - podstrona prezentuje interaktywne
+          wykresy pozwalające porównać złożoności obliczeniowe wybranych
+          algorytmów sortowania.
+        </p>
+        <p className="opis">
+          <a href="/animacje">Animacje</a> - prezentacja zasady działania
+          wybranych algorytmów sortowania za pomocą animacji.
+        </p>
       </div>
     );
   }

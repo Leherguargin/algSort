@@ -1,5 +1,5 @@
 .container {
-  display: flex;
+  /* display: flex; */
   height: 100%;
   width: 100%;
   margin: 0;
@@ -14,4 +14,22 @@
   padding: 3px;
   margin: 5px;
   color: aqua;
+}
+
+.opis {
+  font-family: "Roboto", sans-serif;
+  color: silver;
+  margin-left: 50px;
+}
+
+.tytul {
+  margin-top: 30px;
+  margin-left: 40px;
+  font-size: 30px;
+  color: silver;
+}
+
+a,
+a:hover {
+  color: silver;
 }
