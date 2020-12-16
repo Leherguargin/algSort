@@ -44,7 +44,7 @@ export default class Wykres extends PureComponent {
           </XAxis>
           <YAxis>
             <Label
-              value="czas sortowania [ns]"
+              value="czas sortowania [ms]"
               offset={0}
               position="left"
               angle={-90}

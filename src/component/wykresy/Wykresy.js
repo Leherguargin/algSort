@@ -84,6 +84,19 @@ export default class Wykresy extends React.Component {
       .then((res) => res.json())
       .then(
         (resoult) => {
+          for (let value of resoult) {
+            for (let property in value) {
+              // console.log(resoult[property]);
+              if (
+                value[property] !== 0 &&
+                property !== "iloscElementowSortoweanejTAblicy"
+              ) {
+                value[property] /= 1000000;
+              }
+              // console.log(resoult[property]);
+            }
+          }
+
           this.setState({
             daneDoWykresu: resoult,
             isLoaded: true,
