@@ -8,7 +8,7 @@ import opisyAlgorytmow from "./opisyAlgorytmow.json";
 export default class Animacje extends React.Component {
   constructor(props) {
     super(props);
-    this.tl = gsap.timeline();
+    this.tl = gsap.timeline().addLabel("start");
     this.tab = null;
     this.trojkat = null;
     this.primaryColor = "#209781";
@@ -28,6 +28,9 @@ export default class Animacje extends React.Component {
     this.state = {
       sortujDisabled: false,
       losujDisabled: false,
+      zastosujDisabled: false,
+      resetDisabled: true,
+      pauseDisabled: true,
       dane: tablicaDanych,
       dostepneAlgorytmy: [
         { value: "quickSort", label: "quickSort" },
@@ -56,9 +59,6 @@ export default class Animacje extends React.Component {
   componentDidMount() {
     this.tab = document.querySelectorAll(".element");
     this.trojkat = document.querySelectorAll(".triangle");
-    //console.log(this.trojkat);
-    //for (let i = 0; i < 1000; i++)//test losowania
-    //console.log(Math.floor(Math.random() * 10) % 8);
   }
 
   handleSelectChange = (event) => {
@@ -74,6 +74,13 @@ export default class Animacje extends React.Component {
   };
 
   selectMethodAndSort = () => {
+    this.setState({
+      losujDisabled: true,
+      sortujDisabled: true,
+      zastosujDisabled: true,
+      resetDisabled: false,
+      pauseDisabled: false,
+    });
     switch (this.state.wybranyAlgorytm) {
       case "quickSort":
         this.quickSortAnimation();
@@ -98,6 +105,29 @@ export default class Animacje extends React.Component {
     }
   };
 
+  resetAnimation = () => {
+    //wraca na początek animacji
+    this.tl.seek("start"); //wraca do początkowego stanu animacji
+    this.tl.kill(); //usuwa animacje
+    this.tl = gsap.timeline().addLabel("start"); //tworzy nową animacje
+    this.setState({
+      sortujDisabled: false,
+      losujDisabled: false,
+      zastosujDisabled: false,
+    });
+  };
+
+  pauseOrUnPause = (event) => {
+    console.log(event.target.innerText);
+    if (event.target.innerText === "Zatrzymaj") {
+      this.tl.pause();
+      event.target.innerText = "Wznów";
+    } else {
+      this.tl.resume();
+      event.target.innerText = "Zatrzymaj";
+    }
+  };
+
   render() {
     const elementy = [0, 1, 2, 3, 4, 5, 6, 7].map((item, index) => {
       return (
@@ -114,7 +144,7 @@ export default class Animacje extends React.Component {
               variant="outline-info"
               onClick={this.selectMethodAndSort}
               disabled={this.state.sortujDisabled}
-              style={{ marginLeft: "auto", marginRight: "auto" }}
+              className="btnMy"
             >
               Sortuj
             </Button>
@@ -124,21 +154,52 @@ export default class Animacje extends React.Component {
               variant="outline-info"
               onClick={this.randomValues}
               disabled={this.state.losujDisabled}
+              className="btnMy"
             >
               Losuj wartości
             </Button>
-            <Select
-              options={this.state.dostepneAlgorytmy}
-              className="select"
-              onChange={this.handleSelectChange}
-              defaultInputValue={this.state.wybranyAlgorytm}
-            />
-            <Button
-              variant="outline-info"
-              onClick={this.changeTitleAndDescription}
-            >
-              Zastosuj
-            </Button>
+            <div className="select-form">
+              <div m="2">
+                <Select
+                  options={this.state.dostepneAlgorytmy}
+                  className="select"
+                  onChange={this.handleSelectChange}
+                  defaultInputValue={this.state.wybranyAlgorytm}
+                />
+              </div>
+
+              <div m="2">
+                <Button
+                  variant="outline-info"
+                  onClick={this.changeTitleAndDescription}
+                  disabled={this.state.zastosujDisabled}
+                  className="btnMy"
+                >
+                  Zastosuj
+                </Button>
+              </div>
+            </div>
+
+            <div m="2">
+              <Button
+                variant="outline-info"
+                onClick={this.resetAnimation}
+                className="btnMy"
+                disabled={this.state.resetDisabled}
+              >
+                Reset
+              </Button>
+            </div>
+            <div m="2">
+              <Button
+                variant="outline-info"
+                onClick={this.pauseOrUnPause}
+                className="btnMy"
+                disabled={this.state.pauseDisabled}
+              >
+                Zatrzymaj
+              </Button>
+            </div>
           </div>
         </nav>
 
