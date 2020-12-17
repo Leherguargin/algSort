@@ -118,7 +118,6 @@ export default class Animacje extends React.Component {
   };
 
   pauseOrUnPause = (event) => {
-    console.log(event.target.innerText);
     if (event.target.innerText === "Zatrzymaj") {
       this.tl.pause();
       event.target.innerText = "Wznów";
@@ -242,12 +241,7 @@ export default class Animacje extends React.Component {
       x[i] = 134 * i;
     }
     //Start sortowania
-
-    console.log(elements.map((e) => e.innerText));
-    // let resoult = this.quickSort(elements, x, 0, elements.length - 1);
-
     this.quickSort(elements, x, 0, elements.length - 1);
-    console.log(elements.map((e) => e.innerText));
   }
 
   swap(items, x, leftIndex, rightIndex) {
@@ -511,7 +505,6 @@ export default class Animacje extends React.Component {
       }
       n++;
     } while (swapped);
-    console.log(this.tl.totalDuration());
     //this.setState({ losujDisabled: false, sortujDisabled: false });
     window.setTimeout(() => {
       this.setState({
