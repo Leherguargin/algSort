@@ -1,45 +1,84 @@
 {
-    "dane_do_wykresu": [{
-            "name": "Page A",
-            "uv": 4000,
-            "pv": 2400,
-            "amt": 2400
-        },
-        {
-            "name": "Page B",
-            "uv": 3000,
-            "pv": 1398,
-            "amt": 2210
-        },
-        {
-            "name": "Page C",
-            "uv": 2000,
-            "pv": 9800,
-            "amt": 2290
-        },
-        {
-            "name": "Page D",
-            "uv": 2780,
-            "pv": 3908,
-            "amt": 2000
-        },
-        {
-            "name": "Page E",
-            "uv": 1890,
-            "pv": 4800,
-            "amt": 2181
-        },
-        {
-            "name": "Page F",
-            "uv": 2390,
-            "pv": 3800,
-            "amt": 2500
-        },
-        {
-            "name": "Page G",
-            "uv": 3490,
-            "pv": 4300,
-            "amt": 2100
-        }
-    ]
+  "dane_do_wykresu": [
+    {
+      "bubbleSort": 0.000154,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 0.000431,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 0.00008,
+      "iloscElementowSortoweanejTAblicy": 0
+    },
+    {
+      "bubbleSort": 1.343147,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 0.171419,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 0.751736,
+      "iloscElementowSortoweanejTAblicy": 1000
+    },
+    {
+      "bubbleSort": 5.194481,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 0.600994,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 2.001778,
+      "iloscElementowSortoweanejTAblicy": 2000
+    },
+    {
+      "bubbleSort": 12.160592,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 1.241666,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 4.530633,
+      "iloscElementowSortoweanejTAblicy": 3000
+    },
+    {
+      "bubbleSort": 23.913262,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 2.157788,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 7.418092,
+      "iloscElementowSortoweanejTAblicy": 4000
+    },
+    {
+      "bubbleSort": 36.308596,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 3.737038,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 12.008271,
+      "iloscElementowSortoweanejTAblicy": 5000
+    },
+    {
+      "bubbleSort": 52.307475,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 4.827674,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 16.498612,
+      "iloscElementowSortoweanejTAblicy": 6000
+    },
+    {
+      "bubbleSort": 71.739274,
+      "countingSort": 0,
+      "heapSort": 0,
+      "insertionSort": 6.54943,
+      "mergeSort": 0,
+      "quickSort": 0,
+      "selectionSort": 21.976541,
+      "iloscElementowSortoweanejTAblicy": 7000
+    }
+  ]
 }

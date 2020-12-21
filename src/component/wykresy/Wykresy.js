@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import XLSX from "xlsx";
 import InputFileButton from "../InputFileButton";
+import data from "../../resources/dane.json";
 
 export default class Wykresy extends React.Component {
   //backendAdress = "http://localhost:8080/sort";
@@ -13,8 +14,9 @@ export default class Wykresy extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
+      fetched: false,
       error: null,
-      wyswietlaneAlgorytmy: [false, false, false, false, false, false],
+      wyswietlaneAlgorytmy: [false, true, true, true, false, false],
       dostepneAlgorytmy: [
         "quickSort",
         "selectionSort",
@@ -24,12 +26,14 @@ export default class Wykresy extends React.Component {
         "countingSort",
         "heapSort",
       ],
+
       odIlu: 0,
       doIlu: 7001,
       coIle: 1000,
-      daneDoWykresu: [],
+      daneDoWykresu: data.dane_do_wykresu,
     };
 
+    this.loadData = this.loadData.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -43,7 +47,7 @@ export default class Wykresy extends React.Component {
   }
 
   handleSubmit(event) {
-    this.componentDidMount();
+    this.loadData();
     event.preventDefault();
   }
 
@@ -64,7 +68,15 @@ export default class Wykresy extends React.Component {
     //this.props.danePowrotne(plik, this.state);
   }
 
-  componentDidMount() {
+  loadData() {
+    this.setState({ fetched: true });
+    if (
+      this.state.wyswietlaneAlgorytmy.find((element) => {
+        return element;
+      }) !== undefined
+    ) {
+      console.log();
+    }
     fetch(this.backendAdress, {
       method: "POST",
       headers: {
@@ -113,21 +125,25 @@ export default class Wykresy extends React.Component {
   }
 
   render() {
-    const { isLoaded, error } = this.state;
+    const { isLoaded, error, fetched } = this.state;
     if (error) {
       return <div> Błąd: {error.message} </div>;
     } else {
+      //nie było fetcha
       let wykresik = (
         <section className="col-md-10">
-          <div style={{ color: "white" }}> Ładowanie... </div>
+          <Wykres
+            szerokoscWykresu={(8 / 12) * window.innerWidth}
+            wysokoscWykresu={(8 / 12) * window.innerHeight}
+            dane={this.state.daneDoWykresu}
+            jakieAlgorytmy={this.state.dostepneAlgorytmy}
+            wyswietlaneAlgorytmy={this.state.wyswietlaneAlgorytmy}
+          />
         </section>
       );
-      if (
-        isLoaded &&
-        this.state.wyswietlaneAlgorytmy.find((element) => {
-          return element;
-        }) !== undefined
-      ) {
+
+      //byl fetch i zaladowano dane
+      if (isLoaded && fetched) {
         wykresik = (
           <section className="col-md-10">
             <Wykres
@@ -140,6 +156,15 @@ export default class Wykresy extends React.Component {
           </section>
         );
       }
+      //byl fetch ale nie zaladowano danych
+      if (!isLoaded && fetched) {
+        wykresik = <div style={{ color: "silver" }}> Ładowanie...</div>;
+      }
+      // if (
+      //   isLoaded &&
+      //   this.state.wyswietlaneAlgorytmy.find((element) => {
+      //     return element;
+      //   }) !== undefined
 
       return (
         <div>
@@ -157,7 +182,8 @@ export default class Wykresy extends React.Component {
                         className="text-white m-1"
                         onChange={this.handleInputChange}
                         value={this.state.wyswietlaneAlgorytmy[index]}
-                      />{" "}
+                        checked={this.state.wyswietlaneAlgorytmy[index]}
+                      />
                     </div>
                   ))}
                   <Button

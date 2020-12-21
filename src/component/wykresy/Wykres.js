@@ -12,7 +12,15 @@ import {
 
 export default class Wykres extends PureComponent {
   static jsfiddleUrl = "https://jsfiddle.net/alidingling/xqjtetw0/";
-  kolorki = ["#fff200", "#ff0000", "#00ff15", "#ff00ea", "#211aec", "#ec6f10"];
+  kolorki = [
+    "#fff200",
+    "#ff0000",
+    "#00ff15",
+    "#ff00ea",
+    "#211aec",
+    "#ec6f10",
+    "#334567",
+  ];
 
   renderColorfulLegendText(value, entry) {
     const { color } = entry;
@@ -20,6 +28,7 @@ export default class Wykres extends PureComponent {
   }
 
   render() {
+    console.log(this.props.dane);
     return (
       <div>
         <LineChart
