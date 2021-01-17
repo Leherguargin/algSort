@@ -21,6 +21,7 @@ export default class Wykres extends PureComponent {
     "#ec6f10",
     "#334567",
   ];
+  x = [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2];
 
   renderColorfulLegendText(value, entry) {
     const { color } = entry;
@@ -29,6 +30,30 @@ export default class Wykres extends PureComponent {
 
   render() {
     console.log(this.props.dane);
+    let osY = (
+      <YAxis>
+        <Label
+          value="czas sortowania [ms]"
+          offset={0}
+          position="left"
+          angle={-90}
+          fill={"white"}
+        />
+      </YAxis>
+    );
+    if (this.props.czyPamiec === "true") {
+      osY = (
+        <YAxis>
+          <Label
+            value="ilość pamięci  [byte]"
+            offset={0}
+            position="left"
+            angle={-90}
+            fill={"white"}
+          />
+        </YAxis>
+      );
+    }
     return (
       <div>
         <LineChart
@@ -51,15 +76,7 @@ export default class Wykres extends PureComponent {
               fill={"white"}
             />
           </XAxis>
-          <YAxis>
-            <Label
-              value="czas sortowania [ms]"
-              offset={0}
-              position="left"
-              angle={-90}
-              fill={"white"}
-            />
-          </YAxis>
+          {osY}
           <Tooltip />
           <Legend stroke="#000000" formatter={this.renderColorfulLegendText} />
           {this.props.wyswietlaneAlgorytmy.map((el, index, array) => {
@@ -68,6 +85,7 @@ export default class Wykres extends PureComponent {
                 <Line
                   type="monotone"
                   dataKey={this.props.jakieAlgorytmy[index]}
+                  label={this.x[index]}
                   stroke={this.kolorki[index]}
                   activeDot={{ r: 8 }}
                   key={index}

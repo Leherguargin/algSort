@@ -2,13 +2,22 @@ import React from "react";
 import Wykres from "./Wykres";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import XLSX from "xlsx";
-import InputFileButton from "../InputFileButton";
+// import XLSX from "xlsx";
+// import InputFileButton from "../InputFileButton";
 import data from "../../resources/dane.json";
+// import Switch from "@material-ui/core/Switch";
+// import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import clsx from "clsx";
+import { withStyles } from "@material-ui/core/styles";
 
 export default class Wykresy extends React.Component {
-  //backendAdress = "http://localhost:8080/sort";
-  backendAdress = "https://inzmlback.herokuapp.com/sort";
+  backendAdress = "http://localhost:8080/sort";
+  //backendAdress = "https://inzmlback.herokuapp.com/sort";
 
   constructor(props) {
     super(props);
@@ -16,17 +25,26 @@ export default class Wykresy extends React.Component {
       isLoaded: false,
       fetched: false,
       error: null,
-      wyswietlaneAlgorytmy: [false, true, true, true, false, false],
+      memory: "false",
+      wyswietlaneAlgorytmy: [false, false, false, false, true, true, true],
       dostepneAlgorytmy: [
         "quickSort",
-        "selectionSort",
-        "bubbleSort",
-        "insertionSort",
+        "heapSort",
         "mergeSort",
         "countingSort",
-        "heapSort",
+        "insertionSort",
+        "bubbleSort",
+        "selectionSort",
       ],
-
+      dostepneAlgorytmyLabel: [
+        "sortowanie szybkie",
+        "sortowanie przez kopcowanie",
+        "sortowanie przez scalanie",
+        "sortowanie przez zliczanie",
+        "sortowanie przez wstawianie",
+        "sortowanie bąbelkowe",
+        "sortowanie przez wybór",
+      ],
       odIlu: 0,
       doIlu: 7001,
       coIle: 1000,
@@ -36,6 +54,7 @@ export default class Wykresy extends React.Component {
     this.loadData = this.loadData.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMemoryAndTimeChange = this.handleMemoryAndTimeChange.bind(this);
   }
 
   handleInputChange(event) {
@@ -68,6 +87,11 @@ export default class Wykresy extends React.Component {
     //this.props.danePowrotne(plik, this.state);
   }
 
+  handleMemoryAndTimeChange(event) {
+    this.setState({ memory: event.target.value });
+    event.preventDefault();
+  }
+
   loadData() {
     this.setState({ fetched: true });
     if (
@@ -77,7 +101,9 @@ export default class Wykresy extends React.Component {
     ) {
       console.log();
     }
-    fetch(this.backendAdress, {
+    let addr = this.backendAdress + "/time";
+    if (this.state.memory === "true") addr = this.backendAdress + "/memory";
+    fetch(addr, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -108,7 +134,6 @@ export default class Wykresy extends React.Component {
               // console.log(resoult[property]);
             }
           }
-
           this.setState({
             daneDoWykresu: resoult,
             isLoaded: true,
@@ -138,6 +163,8 @@ export default class Wykresy extends React.Component {
             dane={this.state.daneDoWykresu}
             jakieAlgorytmy={this.state.dostepneAlgorytmy}
             wyswietlaneAlgorytmy={this.state.wyswietlaneAlgorytmy}
+            czyPamiec={this.state.memory}
+            dostepneAlgorytmyLabel={this.state.dostepneAlgorytmyLabel}
           />
         </section>
       );
@@ -152,6 +179,7 @@ export default class Wykresy extends React.Component {
               dane={this.state.daneDoWykresu}
               jakieAlgorytmy={this.state.dostepneAlgorytmy}
               wyswietlaneAlgorytmy={this.state.wyswietlaneAlgorytmy}
+              czyPamiec={this.state.memory}
             />
           </section>
         );
@@ -176,7 +204,7 @@ export default class Wykresy extends React.Component {
                   {this.state.dostepneAlgorytmy.map((element, index, arr) => (
                     <div key={index} className="m-3">
                       <Form.Check
-                        label={element}
+                        label={this.state.dostepneAlgorytmyLabel[index]}
                         type="checkbox"
                         name={index}
                         className="text-white m-1"
@@ -186,20 +214,45 @@ export default class Wykresy extends React.Component {
                       />
                     </div>
                   ))}
+                  <FormControl component="fieldset">
+                    <FormLabel component="legend" style={{ color: "silver" }}>
+                      Rodzaj złożoności
+                    </FormLabel>
+                    <RadioGroup
+                      aria-label="type of data"
+                      name="czasLubPamiec"
+                      value={this.state.memory}
+                      onChange={this.handleMemoryAndTimeChange}
+                    >
+                      <FormControlLabel
+                        value="false"
+                        control={<Radio />}
+                        label="czasowa"
+                        style={{ color: "silver" }}
+                      />
+                      <FormControlLabel
+                        value="true"
+                        control={<Radio />}
+                        label="pamięciowa"
+                        style={{ color: "silver" }}
+                      />
+                    </RadioGroup>
+                  </FormControl>
                   <Button
                     type="button"
                     variant="outline-info"
                     onClick={this.handleSubmit}
+                    style={{ display: "block" }}
                   >
                     Zastosuj
                   </Button>
                 </Form>
                 <div className="m-3">
-                  <legend className="text-white"> Z pliku excel </legend>
+                  {/* <legend className="text-white"> Z pliku excel </legend>
                   <InputFileButton
                     buttonClass="outline-info"
                     funkcjaObslugujacaPliki={this.obslugaExcela}
-                  />
+                  /> */}
                 </div>
               </div>
             </nav>
