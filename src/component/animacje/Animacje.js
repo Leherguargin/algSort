@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { Button } from "react-bootstrap";
 import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
+import SimpleModal from "./schematyBlokowe.js";
 
 export default class Animacje extends React.Component {
   constructor(props) {
@@ -33,12 +34,13 @@ export default class Animacje extends React.Component {
       pauseDisabled: true,
       dane: tablicaDanych,
       dostepneAlgorytmy: [
-        { value: "quickSort", label: "quickSort" },
-        { value: "selectionSort", label: "selectionSort" },
-        { value: "bubbleSort", label: "bubbleSort" },
-        { value: "insertionSort", label: "insertionSort" },
-        // { value: "mergeSort", label: "mergeSort" },
-        // { value: "heapSort", label: "heapSort" },
+        { value: "quickSort", label: "sortowanie szybkie" },
+        { value: "selectionSort", label: "sortowanie przez wybór" },
+        { value: "bubbleSort", label: "sortowanie bąbelkowe" },
+        { value: "insertionSort", label: "sortowanie przez wstawianie" },
+        { value: "mergeSort", label: "sortowanie przez scalanie" },
+        { value: "heapSort", label: "sortowanie przez kopcowanie" },
+        { value: "countingSort", label: "sortowanie przez zliczanie" },
       ],
       wybranyAlgorytm: "quickSort",
       opisDzialaniaAlgorytmu: opisyAlgorytmow["quickSort"],
@@ -82,22 +84,22 @@ export default class Animacje extends React.Component {
       pauseDisabled: false,
     });
     switch (this.state.wybranyAlgorytm) {
-      case "quickSort":
+      case "sortowanie szybkie":
         this.quickSortAnimation();
         break;
-      case "selectionSort":
+      case "sortowanie przez wybór":
         this.selectionSortAnimation();
         break;
-      case "bubbleSort":
+      case "sortowanie bąbelkowe":
         this.bubbleSortAnimation();
         break;
-      case "insertionSort":
+      case "sortowanie przez wstawianie":
         this.insertionSortAnimation();
         break;
-      case "mergeSort":
+      case "sortowanie przez scalanie":
         this.mergeSortAnimation();
         break;
-      case "heapSort":
+      case "sortowanie przez kopcowanie":
         this.heapSortAnimation();
         break;
       default:
@@ -199,6 +201,7 @@ export default class Animacje extends React.Component {
                 Zatrzymaj
               </Button>
             </div>
+            <SimpleModal />
           </div>
         </nav>
 
