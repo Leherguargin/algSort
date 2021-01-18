@@ -10,6 +10,7 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
+    width: "900px",
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
