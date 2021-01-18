@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button } from "react-bootstrap";
-// import bubbleSort from "";
 
 function getModalStyle() {
   const top = 50;
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(alg) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -40,11 +39,23 @@ export default function SimpleModal() {
     setOpen(false);
   };
 
+  const algs = [
+    { value: "quickSort", label: "sortowanie szybkie" },
+    { value: "selectionSort", label: "sortowanie przez wybór" },
+    { value: "bubbleSort", label: "sortowanie bąbelkowe" },
+    { value: "insertionSort", label: "sortowanie przez wstawianie" },
+    { value: "mergeSort", label: "sortowanie przez scalanie" },
+    { value: "heapSort", label: "sortowanie przez kopcowanie" },
+    { value: "countingSort", label: "sortowanie przez zliczanie" },
+  ];
+
+  const algoritm = algs.find((e) => e.label === alg.alg).value;
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Schemat blokowy</h2>
       <img
-        src={require("../../resources/diagrams/bubbleSort.png")}
+        src={require("../../resources/diagrams/" + algoritm + ".png")}
         alt="obraz przedstawiający schemat blokowy algorytmu"
       />
     </div>

@@ -42,11 +42,11 @@ export default class Animacje extends React.Component {
         { value: "heapSort", label: "sortowanie przez kopcowanie" },
         { value: "countingSort", label: "sortowanie przez zliczanie" },
       ],
-      wybranyAlgorytm: "quickSort",
-      opisDzialaniaAlgorytmu: opisyAlgorytmow["quickSort"],
+      wybranyAlgorytm: "sortowanie szybkie",
+      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie szybkie"],
     };
-    this.wybranyAlgorytm = "quickSort";
-    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["quickSort"];
+    this.wybranyAlgorytm = "sortowanie szybkie";
+    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["sortowanie szybkie"];
     this.quickSortNowa = 0;
     this.color = ["yellow", "pink", "purple", "gray", "orange", "cyan"];
 
@@ -201,7 +201,7 @@ export default class Animacje extends React.Component {
                 Zatrzymaj
               </Button>
             </div>
-            <SimpleModal />
+            <SimpleModal alg={this.state.wybranyAlgorytm} />
           </div>
         </nav>
 
