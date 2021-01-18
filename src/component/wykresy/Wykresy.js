@@ -16,8 +16,8 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 
 export default class Wykresy extends React.Component {
-  backendAdress = "http://localhost:8080/sort";
-  //backendAdress = "https://inzmlback.herokuapp.com/sort";
+  // backendAdress = "http://localhost:8080/sort";
+  backendAdress = "https://inzmlback.herokuapp.com/sort";
 
   constructor(props) {
     super(props);
