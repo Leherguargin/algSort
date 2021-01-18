@@ -201,7 +201,16 @@ export default class Animacje extends React.Component {
                 Zatrzymaj
               </Button>
             </div>
-            <SimpleModal alg={this.state.wybranyAlgorytm} />
+            <SimpleModal
+              alg={this.state.wybranyAlgorytm}
+              d={"diagrams"}
+              title="Schemat blokowy"
+            />
+            <SimpleModal
+              alg={this.state.wybranyAlgorytm}
+              d={"pseudocodes"}
+              title={"Pseudokod"}
+            />
           </div>
         </nav>
 

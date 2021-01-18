@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal(alg) {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -49,14 +49,14 @@ export default function SimpleModal(alg) {
     { value: "countingSort", label: "sortowanie przez zliczanie" },
   ];
 
-  const algoritm = algs.find((e) => e.label === alg.alg).value;
+  const algoritm = algs.find((e) => e.label === props.alg).value;
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Schemat blokowy</h2>
+      <h2 id="simple-modal-title">{props.title}</h2>
       <img
-        src={require("../../resources/diagrams/" + algoritm + ".png")}
-        alt="obraz przedstawiający schemat blokowy algorytmu"
+        src={require("../../resources/" + props.d + "/" + algoritm + ".png")}
+        alt="obraz przedstawiający schemat blokowy algorytmu lub pseudokod"
       />
     </div>
   );
@@ -65,7 +65,7 @@ export default function SimpleModal(alg) {
     <div>
       <div m="2">
         <Button variant="outline-info" onClick={handleOpen} className="btnMy">
-          Schemat blokowy
+          {props.title}
         </Button>
       </div>
       <Modal
