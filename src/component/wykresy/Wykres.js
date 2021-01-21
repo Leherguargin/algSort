@@ -29,7 +29,7 @@ export default class Wykres extends PureComponent {
   }
 
   render() {
-    console.log(this.props.dane);
+    // console.log(this.props.dane);
     let osY = (
       <YAxis>
         <Label

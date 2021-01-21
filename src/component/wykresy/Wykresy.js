@@ -127,7 +127,8 @@ export default class Wykresy extends React.Component {
               // console.log(resoult[property]);
               if (
                 value[property] !== 0 &&
-                property !== "iloscElementowSortoweanejTAblicy"
+                property !== "iloscElementowSortoweanejTAblicy" &&
+                this.state.memory !== "true"
               ) {
                 value[property] /= 1000000;
               }
