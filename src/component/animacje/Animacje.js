@@ -487,36 +487,36 @@ export default class Animacje extends React.Component {
       elements[i] = this.tab[i];
       x[i] = 0;
     }
-    let swapped;
-    let n = 0;
+    // let swapped;
+    let n = elements.length;
     do {
-      swapped = false;
-      for (let i = elements.length - 1; i > n; i--) {
+      // swapped = false;
+      for (let i = 0; i < n - 1; i++) {
         this.tl
-          .to(this.trojkat[i], 1, { opacity: 1 })
-          .to(this.trojkat[i - 1], 1, { opacity: 1 }, "-=1")
-          .to(this.trojkat[i], 1, { opacity: 0 })
-          .to(this.trojkat[i - 1], 1, { opacity: 0 }, "-=1");
-        if (elements[i].innerText < elements[i - 1].innerText) {
+          .to(this.trojkat[i + 1], 1, { opacity: 1 })
+          .to(this.trojkat[i], 1, { opacity: 1 }, "-=1")
+          .to(this.trojkat[i + 1], 1, { opacity: 0 })
+          .to(this.trojkat[i], 1, { opacity: 0 }, "-=1");
+        if (elements[i].innerText > elements[i + 1].innerText) {
           this.tl
-            .to(elements[i], 1, { x: (x[i] += -67), y: -67 })
-            .to(elements[i - 1], 1, { x: (x[i - 1] += 67), y: 67 }, "-=1")
-            .to(elements[i], 1, { x: (x[i] += -67), y: 0 })
-            .to(elements[i - 1], 1, { x: (x[i - 1] += 67), y: 0 }, "-=1");
+            .to(elements[i + 1], 1, { x: (x[i + 1] += -67), y: -67 })
+            .to(elements[i], 1, { x: (x[i] += 67), y: 67 }, "-=1")
+            .to(elements[i + 1], 1, { x: (x[i + 1] += -67), y: 0 })
+            .to(elements[i], 1, { x: (x[i] += 67), y: 0 }, "-=1");
 
           const temp = elements[i];
-          elements[i] = elements[i - 1];
-          elements[i - 1] = temp;
+          elements[i] = elements[i + 1];
+          elements[i + 1] = temp;
 
           const xx = x[i];
-          x[i] = x[i - 1];
-          x[i - 1] = xx;
+          x[i] = x[i + 1];
+          x[i + 1] = xx;
 
-          swapped = true;
+          // swapped = true;
         }
       }
-      n++;
-    } while (swapped);
+      n--;
+    } while (n > 1);
     //this.setState({ losujDisabled: false, sortujDisabled: false });
     window.setTimeout(() => {
       this.setState({
