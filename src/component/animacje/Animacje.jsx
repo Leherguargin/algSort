@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { Button } from "react-bootstrap";
 import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
-import SimpleModal from "./schematyBlokowe.js";
+import SimpleModal from "./schematyBlokowe";
 
 export default class Animacje extends React.Component {
   constructor(props) {

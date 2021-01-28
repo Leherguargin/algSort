@@ -6,11 +6,12 @@ import { Button } from "react-bootstrap";
 function getModalStyle() {
   const top = 50;
   const left = 50;
+  const width = 600;
 
   return {
     top: `${top}%`,
     left: `${left}%`,
-    width: "900px",
+    width: `${width}px`,
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
@@ -72,8 +73,8 @@ export default function SimpleModal(props) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        aria-labelledby="Pseudocode or block diagram"
+        aria-describedby="Modal with pseudocode or block diagram"
       >
         {body}
       </Modal>

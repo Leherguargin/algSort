@@ -16,7 +16,7 @@ export default class Home extends React.Component {
           Platforma do analizy złożoności obliczeniowej algorytmów sortowania
         </h1>
         <p className="opis">
-          <a href="/wykres">Wykresy</a> - podstrona prezentuje interaktywne
+          <a href="/wykresy">Wykresy</a> - podstrona prezentuje interaktywne
           wykresy pozwalające porównać złożoności obliczeniowe wybranych
           algorytmów sortowania.
         </p>
