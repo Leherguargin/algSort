@@ -5,6 +5,8 @@ import { Button } from "react-bootstrap";
 import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
 import SimpleModal from "./schematyBlokowe";
+import Histogram from "./Histogram";
+import { yellow } from "@material-ui/core/colors";
 
 export default class Animacje extends React.Component {
   constructor(props) {
@@ -42,20 +44,13 @@ export default class Animacje extends React.Component {
         { value: "heapSort", label: "sortowanie przez kopcowanie" },
         { value: "countingSort", label: "sortowanie przez zliczanie" },
       ],
-      wybranyAlgorytm: "sortowanie szybkie",
-      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie szybkie"],
+      wybranyAlgorytm: "sortowanie przez zliczanie",
+      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie przez zliczanie"],
     };
-    this.wybranyAlgorytm = "sortowanie szybkie";
-    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["sortowanie szybkie"];
+    this.wybranyAlgorytm = "sortowanie przez zliczanie";
+    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["sortowanie przez zliczanie"];
     this.quickSortNowa = 0;
     this.color = ["yellow", "pink", "purple", "gray", "orange", "cyan"];
-
-    this.bubbleSortAnimation = this.bubbleSortAnimation.bind(this);
-    this.randomValues = this.randomValues.bind(this);
-    this.swap = this.swap.bind(this);
-    this.partition = this.partition.bind(this);
-    this.quickSort = this.quickSort.bind(this);
-    // this.quickSort2 = this.quickSort2.bind(this);
   }
 
   componentDidMount() {
@@ -101,6 +96,9 @@ export default class Animacje extends React.Component {
         break;
       case "sortowanie przez kopcowanie":
         this.heapSortAnimation();
+        break;
+      case "sortowanie przez zliczanie":
+        this.countingSortAnimation();
         break;
       default:
         console.log("brak odpowidajacej metody sortujacej :(");
@@ -237,6 +235,7 @@ export default class Animacje extends React.Component {
             <div className="triangle"> </div>
             <div className="triangle"> </div>
           </div>
+          <Histogram />
           <div style={{ fontFamily: "Times New Roman", fontSize: 20 }}>
             {this.state.opisDzialaniaAlgorytmu}
           </div>
@@ -245,7 +244,7 @@ export default class Animacje extends React.Component {
     );
   }
 
-  quickSortAnimation() {
+  quickSortAnimation = () => {
     let elements = [];
     let x = [];
     for (let i = 0; i < this.tab.length; i++) {
@@ -254,9 +253,9 @@ export default class Animacje extends React.Component {
     }
     //Start sortowania
     this.quickSort(elements, x, 0, elements.length - 1);
-  }
+  };
 
-  swap(items, x, leftIndex, rightIndex) {
+  swap = (items, x, leftIndex, rightIndex) => {
     this.tl
       .to(items[leftIndex], { duration: 1, y: "-=135" }) //podniesienie do gory
       .to(items[rightIndex], { duration: 1, y: "-=135" }, "-=1")
@@ -275,9 +274,9 @@ export default class Animacje extends React.Component {
     let temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
-  }
+  };
 
-  partition(items, x, left, right) {
+  partition = (items, x, left, right) => {
     let pivot = items[Math.floor((right + left) / 2)],
       i = left, //left pointer
       j = right; //right pointer
@@ -337,9 +336,9 @@ export default class Animacje extends React.Component {
     });
 
     return i;
-  }
+  };
 
-  quickSort(items, x, left, right) {
+  quickSort = (items, x, left, right) => {
     let index;
     if (items.length > 1) {
       index = this.partition(items, x, left, right);
@@ -363,7 +362,7 @@ export default class Animacje extends React.Component {
       }
     }
     return items;
-  }
+  };
 
   mergeSortAnimation() {
     this.setState({ losujDisabled: true, sortujDisabled: true });
@@ -377,7 +376,6 @@ export default class Animacje extends React.Component {
 
   heapSortAnimation() {
     //sortowanie rosnąco
-    //TODO do dokonczenia metoda
     this.setState({ losujDisabled: true, sortujDisabled: true });
     let elements = [];
     let x = [];
@@ -388,6 +386,69 @@ export default class Animacje extends React.Component {
     console.log(elements);
     console.log(elements[0].innerText);
   }
+
+  countingSortAnimation = () => {
+    this.setState({ losujDisabled: true, sortujDisabled: true });
+    let elements = [];
+    for (let i = 0; i < this.tab.length; i++) {
+      elements[i] = this.tab[i];
+    }
+    //start sortowania
+    const his = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //0 - 9 czyli 10 możliwosci
+    const count = document.querySelectorAll(".histogram-element");
+    for (let i in elements) {
+      his[elements[i].innerText]++;
+      this.tl
+        .to(this.trojkat[i], { duration: 1, opacity: 1 })
+        .to(count[elements[i].innerText], {
+          duration: 1,
+          backgroundColor: "yellow",
+        })
+        .set(count[elements[i].innerText], {
+          innerText: "+=1",
+        })
+        .to(count[elements[i].innerText], {
+          duration: 1,
+          backgroundColor: "#209781",
+        })
+        .to(this.trojkat[i], { duration: 1, opacity: 0 });
+    }
+
+    for (let i = 1; i < his.length; ++i) {
+      his[i] += his[i - 1];
+      this.tl
+        .to(count[i], { duration: 1, backgroundColor: "yellow" })
+        .set(count[i], { innerText: "+=" + his[i - 1] })
+        .to(count[i], {
+          duration: 1,
+          backgroundColor: "#209781",
+        });
+    }
+
+    let out = new Array(elements.length);
+    const output = document.querySelectorAll(".output-element");
+    this.tl
+      .to(document.querySelector(".output-container"), {
+        duration: 1,
+        opacity: 1,
+      })
+      .to(
+        output,
+        {
+          duration: 1,
+          opacity: 1,
+        },
+        "-=1"
+      );
+    for (let i = elements.length - 1; i >= 0; --i) {
+      out[--his[elements[i].innerText]] = elements[i].innerText;
+      this.tl.to(output[his[elements[i].innerText]], {
+        duration: 1,
+        innerText: elements[i].innerText,
+      });
+    }
+    this.tl.to(output, { duration: 1, backgroundColor: "#209781" });
+  };
 
   selectionSortAnimation() {
     //sortowanie rosnąco
@@ -478,7 +539,7 @@ export default class Animacje extends React.Component {
     this.tl.to(elements, { backgroundColor: this.primaryColor });
   }
 
-  bubbleSortAnimation() {
+  bubbleSortAnimation = () => {
     //sortowanie rosnąco, działa animacja, sortuje z flagą oraz pomijając juz wybrane minimalne elementy
     this.setState({ losujDisabled: true, sortujDisabled: true });
     let elements = [];
@@ -524,9 +585,9 @@ export default class Animacje extends React.Component {
         sortujDisabled: false,
       });
     }, this.tl.totalDuration() * 1000);
-  }
+  };
 
-  randomValues() {
+  randomValues = () => {
     let arr = [];
     arr.push(Math.floor(Math.random() * 10) % 20);
     this.tab[0].innerText = arr[0];
@@ -538,5 +599,5 @@ export default class Animacje extends React.Component {
       arr.push(r);
       this.tab[i].innerText = r;
     }
-  }
+  };
 }

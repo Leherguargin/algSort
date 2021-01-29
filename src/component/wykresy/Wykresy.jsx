@@ -12,8 +12,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import clsx from "clsx";
-import { withStyles } from "@material-ui/core/styles";
+// import clsx from "clsx";
+// import { withStyles } from "@material-ui/core/styles";
 
 export default class Wykresy extends React.Component {
   // backendAdress = "http://localhost:8080/sort";

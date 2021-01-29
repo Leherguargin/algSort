@@ -56,8 +56,20 @@ main {
   align-content: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   border: 4px solid black;
+}
+
+.output-container {
+  position: relative;
+  background-color: white;
+  width: 1080px;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  border: 4px solid black;
+  opacity: 0;
 }
 
 .boardTriangle {
@@ -82,6 +94,21 @@ main {
   line-height: 55px;
 }
 
+.output-element {
+  background-color: gray;
+  color: black;
+  text-shadow: none;
+  text-align: center;
+  width: 130px;
+  height: 130px;
+  margin: 2px;
+  padding: 28px;
+  display: inline-block;
+  border: 4px solid black;
+  line-height: 55px;
+  opacity: 0;
+}
+
 .triangle {
   width: 0;
   height: 0;
@@ -95,4 +122,29 @@ main {
 
 .choose_element {
   background-color: #0aaf34;
+}
+
+.histogram-container {
+  position: relative;
+  background-color: white;
+  width: 748px;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border: 4px solid black;
+}
+
+.histogram-element {
+  background-color: #209781;
+  color: black;
+  text-shadow: none;
+  text-align: center;
+  width: 70px;
+  height: 70px;
+  margin: 2px;
+  padding: 26px;
+  display: inline-block;
+  border: 2px solid black;
+  line-height: 50%;
 }
