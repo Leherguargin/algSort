@@ -442,12 +442,19 @@ export default class Animacje extends React.Component {
       );
     for (let i = elements.length - 1; i >= 0; --i) {
       out[--his[elements[i].innerText]] = elements[i].innerText;
-      this.tl.to(output[his[elements[i].innerText]], {
-        duration: 1,
-        innerText: elements[i].innerText,
-      });
+      this.tl
+        .to(output[his[elements[i].innerText]], {
+          duration: 1,
+          backgroundColor: "yellow",
+        })
+        .set(output[his[elements[i].innerText]], {
+          innerText: elements[i].innerText,
+        })
+        .to(output[his[elements[i].innerText]], {
+          duration: 1,
+          backgroundColor: "#209781",
+        });
     }
-    this.tl.to(output, { duration: 1, backgroundColor: "#209781" });
   };
 
   selectionSortAnimation() {
