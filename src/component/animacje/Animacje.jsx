@@ -6,7 +6,6 @@ import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
 import SimpleModal from "./schematyBlokowe";
 import Histogram from "./Histogram";
-import { yellow } from "@material-ui/core/colors";
 
 export default class Animacje extends React.Component {
   constructor(props) {
@@ -44,11 +43,12 @@ export default class Animacje extends React.Component {
         { value: "heapSort", label: "sortowanie przez kopcowanie" },
         { value: "countingSort", label: "sortowanie przez zliczanie" },
       ],
-      wybranyAlgorytm: "sortowanie przez zliczanie",
-      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie przez zliczanie"],
+      wybranyAlgorytm: "sortowanie przez kopcowanie",
+      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie przez kopcowanie"],
     };
-    this.wybranyAlgorytm = "sortowanie przez zliczanie";
-    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["sortowanie przez zliczanie"];
+    this.wybranyAlgorytm = "sortowanie przez kopcowanie";
+    this.opisDzialaniaAlgorytmu =
+      opisyAlgorytmow["sortowanie przez kopcowanie"];
     this.quickSortNowa = 0;
     this.color = ["yellow", "pink", "purple", "gray", "orange", "cyan"];
   }
@@ -364,28 +364,71 @@ export default class Animacje extends React.Component {
     return items;
   };
 
-  mergeSortAnimation() {
+  mergeSortAnimation = () => {
     this.setState({ losujDisabled: true, sortujDisabled: true });
     let elements = [];
     let x = [];
     for (let i = 0; i < this.tab.length; i++) {
       elements[i] = this.tab[i];
-      x[i] = 0;
+      x[i] = 134 * i;
     }
-  }
+  };
 
-  heapSortAnimation() {
+  heapSortAnimation = () => {
     //sortowanie rosnąco
     this.setState({ losujDisabled: true, sortujDisabled: true });
     let elements = [];
     let x = [];
     for (let i = 0; i < this.tab.length; i++) {
       elements[i] = this.tab[i];
-      x[i] = 0;
+      x[i] = 134 * i;
     }
-    console.log(elements);
-    console.log(elements[0].innerText);
-  }
+
+    //start sortowania -----------------------------
+    print(elements);
+    this.heapSort(elements, x);
+    print(elements);
+  };
+
+  heapSort = (arr, x) => {
+    let n = arr.length;
+
+    //tworzymy kopiec z tablicy
+    for (let i = n; i > -1; i--) {
+      this.tl.to(arr[i], { duration: 1, backgroundColor: "yellow" }, "-=1");
+    }
+    for (let i = Math.floor(n / 2) - 1; i > -1; i--) {
+      this.heapify(arr, n, i, x);
+    }
+
+    //zamieniamy pierwszy element z ostatnim i tworzymy kopiec z elementów bez ostatniego
+    for (let i = n - 1; i > 0; i--) {
+      this.swap(arr, x, 0, i);
+      this.tl.to(arr[i], { duration: 1, backgroundColor: this.primaryColor });
+      this.heapify(arr, i, 0, x);
+    }
+    this.tl.to(arr[0], { duration: 1, backgroundColor: this.primaryColor });
+  };
+
+  heapify = (arr, n, i, x) => {
+    let max = i;
+    const l = 2 * i + 1;
+    const r = 2 * i + 2;
+
+    // this.tl.to();
+    if (l < n && arr[l].innerText > arr[max].innerText) {
+      max = l;
+    }
+
+    if (r < n && arr[r].innerText > arr[max].innerText) {
+      max = r;
+    }
+
+    if (max !== i) {
+      this.swap(arr, x, i, max);
+      this.heapify(arr, n, max, x);
+    }
+  };
 
   countingSortAnimation = () => {
     this.setState({ losujDisabled: true, sortujDisabled: true });
@@ -608,3 +651,9 @@ export default class Animacje extends React.Component {
     }
   };
 }
+
+const print = (arr) => {
+  let str = "[ ";
+  arr.forEach((e) => (str += e.innerText + " "));
+  console.log(`${str} ]`);
+};
