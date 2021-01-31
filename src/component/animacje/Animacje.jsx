@@ -6,6 +6,7 @@ import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
 import SimpleModal from "./schematyBlokowe";
 import Histogram from "./Histogram";
+import MergeArrays from "./MergeArrays";
 
 export default class Animacje extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Animacje extends React.Component {
     this.tl = gsap.timeline().addLabel("start");
     this.tab = null;
     this.trojkat = null;
+    this.mergeArrays = [];
     this.primaryColor = "#209781";
     let tablicaDanych = [];
     // for (let i = 0; i < 8; i++) {//dane od 8 do 0
@@ -28,6 +30,7 @@ export default class Animacje extends React.Component {
     tablicaDanych[6] = 2;
     tablicaDanych[7] = 4;
     this.state = {
+      mergeArrays: [],
       sortujDisabled: false,
       losujDisabled: false,
       zastosujDisabled: false,
@@ -43,12 +46,11 @@ export default class Animacje extends React.Component {
         { value: "heapSort", label: "sortowanie przez kopcowanie" },
         { value: "countingSort", label: "sortowanie przez zliczanie" },
       ],
-      wybranyAlgorytm: "sortowanie przez kopcowanie",
-      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie przez kopcowanie"],
+      wybranyAlgorytm: "sortowanie przez scalanie",
+      opisDzialaniaAlgorytmu: opisyAlgorytmow["sortowanie przez scalanie"],
     };
-    this.wybranyAlgorytm = "sortowanie przez kopcowanie";
-    this.opisDzialaniaAlgorytmu =
-      opisyAlgorytmow["sortowanie przez kopcowanie"];
+    this.wybranyAlgorytm = "sortowanie przez scalanie";
+    this.opisDzialaniaAlgorytmu = opisyAlgorytmow["sortowanie przez scalanie"];
     this.quickSortNowa = 0;
     this.color = ["yellow", "pink", "purple", "gray", "orange", "cyan"];
   }
@@ -135,6 +137,14 @@ export default class Animacje extends React.Component {
         </div>
       );
     });
+    const histo =
+      this.state.wybranyAlgorytm === "sortowanie przez zliczanie" ? (
+        <Histogram />
+      ) : null;
+    const mergeArraysComponent =
+      this.state.mergeArrays.length !== 0 ? (
+        <MergeArrays data={this.state.mergeArrays} />
+      ) : null;
     return (
       <main style={{ display: "flex" }}>
         <nav className="sidebar-menu">
@@ -235,7 +245,8 @@ export default class Animacje extends React.Component {
             <div className="triangle"> </div>
             <div className="triangle"> </div>
           </div>
-          <Histogram />
+          {histo}
+          {mergeArraysComponent}
           <div style={{ fontFamily: "Times New Roman", fontSize: 20 }}>
             {this.state.opisDzialaniaAlgorytmu}
           </div>
@@ -372,6 +383,65 @@ export default class Animacje extends React.Component {
       elements[i] = this.tab[i];
       x[i] = 134 * i;
     }
+    const arr = elements.map((e) => e.innerText);
+    const sorted = this.mergeSort(arr);
+    // console.log(this.mergeArrays);
+    // this.setState({ mergeArrays: this.mergeArrays });
+    // const arrayki = document.querySelectorAll("#arrayki");
+    // this.tl.to(arrayki, { duration: 1, display: "none" });
+  };
+
+  mergeSort = (arr) => {
+    print(arr);
+    this.mergeArrays.push(arr);
+    this.setState({ mergeArrays: [arr] });
+    const n = arr.length;
+    if (n === 1) return arr;
+
+    if (n > 1) {
+      //dziel:
+      let L = arr.slice(0, n / 2);
+      let R = arr.slice(n / 2, n);
+      // let tabL = arr.slice(0, n / 2);
+      // let tabR = arr.slice(n / 2, n);
+      // let arrayka = [tabL, tabR, ...this.state.mergeArrays];
+      // this.setState({ mergeArrays: arrayka });
+
+      //sortuj
+      let a = this.mergeSort(L);
+      let b = this.mergeSort(R);
+      return this.mergeTwoSortedArrays(a, b);
+    }
+  };
+
+  mergeTwoSortedArrays = (a, b) => {
+    const c = new Array(a.length + b.length);
+    let i = 0,
+      j = 0;
+
+    while (i < a.length && j < b.length) {
+      if (a[i] > b[j]) {
+        c[i + j] = b[j];
+        j += 1;
+      } else {
+        c[i + j] = a[i];
+        i += 1;
+      }
+    }
+
+    while (j < b.length) {
+      c[i + j] = b[j];
+      j += 1;
+    }
+
+    while (i < a.length) {
+      c[i + j] = a[i];
+      i += 1;
+    }
+    print(c);
+    this.mergeArrays.push(c);
+    this.setState({ mergeArrays: [c] });
+    return c;
   };
 
   heapSortAnimation = () => {
@@ -654,6 +724,6 @@ export default class Animacje extends React.Component {
 
 const print = (arr) => {
   let str = "[ ";
-  arr.forEach((e) => (str += e.innerText + " "));
+  arr.forEach((e) => (str += e + " "));
   console.log(`${str} ]`);
 };

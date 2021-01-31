@@ -148,3 +148,12 @@ main {
   border: 2px solid black;
   line-height: 50%;
 }
+
+@keyframes xd {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
