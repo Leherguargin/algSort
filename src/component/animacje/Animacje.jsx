@@ -382,7 +382,6 @@ export default class Animacje extends React.Component {
 
   mergeSort = (arr, l, r, x) => {
     if (l < r) {
-      // print(arr, l, r);
       let m = Math.floor((l + r) / 2);
 
       // Sort first and second halves
@@ -394,6 +393,10 @@ export default class Animacje extends React.Component {
   };
 
   merge = (arr, start, mid, end, x) => {
+    //backup granic obszaru dla animacji:
+    const s = start,
+      e = end;
+
     this.tl.to(
       arr.filter((e, i) => i >= start && i <= end),
       { duration: 1, backgroundColor: "yellow" }
@@ -401,14 +404,7 @@ export default class Animacje extends React.Component {
     let start2 = mid + 1;
 
     // If the direct merge is already sorted
-    // this.tl
-    //   .to(this.trojkat[mid], { duration: 1, opacity: 1 })
-    //   .to(this.trojkat[start2], { duration: 1, opacity: 1 }, "-=1");
     if (arr[mid].innerText <= arr[start2].innerText) {
-      // this.tl
-      //   .to(this.trojkat[mid], { duration: 1, opacity: 0 })
-      //   .to(this.trojkat[start2], { duration: 1, opacity: 0 }, "-=1");
-
       //gasimy zolte
       this.tl.to(
         arr.filter((e, i) => i >= start && i <= end),
@@ -449,7 +445,7 @@ export default class Animacje extends React.Component {
       }
     }
     this.tl.to(
-      arr.filter((e, i) => i >= start && i <= end),
+      arr.filter((el, i) => i >= s && i <= e),
       { duration: 1, backgroundColor: this.primaryColor }
     );
   };
