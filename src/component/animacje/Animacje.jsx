@@ -6,7 +6,6 @@ import Select from "react-select";
 import opisyAlgorytmow from "./opisyAlgorytmow.json";
 import SimpleModal from "./schematyBlokowe";
 import Histogram from "./Histogram";
-import MergeArrays from "./MergeArrays";
 
 export default class Animacje extends React.Component {
   constructor(props) {
@@ -14,7 +13,6 @@ export default class Animacje extends React.Component {
     this.tl = gsap.timeline().addLabel("start");
     this.tab = null;
     this.trojkat = null;
-    this.mergeArrays = [];
     this.primaryColor = "#209781";
     let tablicaDanych = [];
     // for (let i = 0; i < 8; i++) {//dane od 8 do 0
@@ -30,7 +28,6 @@ export default class Animacje extends React.Component {
     tablicaDanych[6] = 2;
     tablicaDanych[7] = 4;
     this.state = {
-      mergeArrays: [],
       sortujDisabled: false,
       losujDisabled: false,
       zastosujDisabled: false,
@@ -141,10 +138,6 @@ export default class Animacje extends React.Component {
       this.state.wybranyAlgorytm === "sortowanie przez zliczanie" ? (
         <Histogram />
       ) : null;
-    const mergeArraysComponent =
-      this.state.mergeArrays.length !== 0 ? (
-        <MergeArrays data={this.state.mergeArrays} />
-      ) : null;
     return (
       <main style={{ display: "flex" }}>
         <nav className="sidebar-menu">
@@ -246,7 +239,6 @@ export default class Animacje extends React.Component {
             <div className="triangle"> </div>
           </div>
           {histo}
-          {mergeArraysComponent}
           <div style={{ fontFamily: "Times New Roman", fontSize: 20 }}>
             {this.state.opisDzialaniaAlgorytmu}
           </div>
@@ -383,65 +375,83 @@ export default class Animacje extends React.Component {
       elements[i] = this.tab[i];
       x[i] = 134 * i;
     }
-    const arr = elements.map((e) => e.innerText);
-    const sorted = this.mergeSort(arr);
-    // console.log(this.mergeArrays);
-    // this.setState({ mergeArrays: this.mergeArrays });
-    // const arrayki = document.querySelectorAll("#arrayki");
-    // this.tl.to(arrayki, { duration: 1, display: "none" });
+    // print(arra, 0, 7);
+    this.mergeSort(elements, 0, elements.length - 1, x);
+    // print(arra, 0, 7);
   };
 
-  mergeSort = (arr) => {
-    print(arr);
-    this.mergeArrays.push(arr);
-    this.setState({ mergeArrays: [arr] });
-    const n = arr.length;
-    if (n === 1) return arr;
+  mergeSort = (arr, l, r, x) => {
+    if (l < r) {
+      // print(arr, l, r);
+      let m = Math.floor((l + r) / 2);
 
-    if (n > 1) {
-      //dziel:
-      let L = arr.slice(0, n / 2);
-      let R = arr.slice(n / 2, n);
-      // let tabL = arr.slice(0, n / 2);
-      // let tabR = arr.slice(n / 2, n);
-      // let arrayka = [tabL, tabR, ...this.state.mergeArrays];
-      // this.setState({ mergeArrays: arrayka });
+      // Sort first and second halves
+      this.mergeSort(arr, l, m, x);
+      this.mergeSort(arr, m + 1, r, x);
 
-      //sortuj
-      let a = this.mergeSort(L);
-      let b = this.mergeSort(R);
-      return this.mergeTwoSortedArrays(a, b);
+      this.merge(arr, l, m, r, x);
     }
   };
 
-  mergeTwoSortedArrays = (a, b) => {
-    const c = new Array(a.length + b.length);
-    let i = 0,
-      j = 0;
+  merge = (arr, start, mid, end, x) => {
+    this.tl.to(
+      arr.filter((e, i) => i >= start && i <= end),
+      { duration: 1, backgroundColor: "yellow" }
+    );
+    let start2 = mid + 1;
 
-    while (i < a.length && j < b.length) {
-      if (a[i] > b[j]) {
-        c[i + j] = b[j];
-        j += 1;
+    // If the direct merge is already sorted
+    // this.tl
+    //   .to(this.trojkat[mid], { duration: 1, opacity: 1 })
+    //   .to(this.trojkat[start2], { duration: 1, opacity: 1 }, "-=1");
+    if (arr[mid].innerText <= arr[start2].innerText) {
+      // this.tl
+      //   .to(this.trojkat[mid], { duration: 1, opacity: 0 })
+      //   .to(this.trojkat[start2], { duration: 1, opacity: 0 }, "-=1");
+
+      //gasimy zolte
+      this.tl.to(
+        arr.filter((e, i) => i >= start && i <= end),
+        { duration: 1, backgroundColor: this.primaryColor }
+      );
+      return;
+    }
+
+    // Two pointers to maintain start
+    // of both arrays to merge
+    while (start <= mid && start2 <= end) {
+      // If element 1 is in right place
+      if (arr[start].innerText <= arr[start2].innerText) {
+        start++;
       } else {
-        c[i + j] = a[i];
-        i += 1;
+        this.tl.to(arr[start2], { duration: 1, y: "-=135" });
+        let value = arr[start2];
+        let index = start2;
+
+        // Shift all the elements between element 1
+        // element 2, right by 1.
+        while (index !== start) {
+          this.tl.to(arr[index - 1], { duration: 1, x: "+=134" });
+          arr[index] = arr[index - 1];
+          index--;
+        }
+        this.tl.to(value, {
+          duration: 1,
+          x: `-=${x[start2] - x[start]}`,
+          y: "+=135",
+        });
+        arr[start] = value;
+
+        // Update all the pointers
+        start++;
+        mid++;
+        start2++;
       }
     }
-
-    while (j < b.length) {
-      c[i + j] = b[j];
-      j += 1;
-    }
-
-    while (i < a.length) {
-      c[i + j] = a[i];
-      i += 1;
-    }
-    print(c);
-    this.mergeArrays.push(c);
-    this.setState({ mergeArrays: [c] });
-    return c;
+    this.tl.to(
+      arr.filter((e, i) => i >= start && i <= end),
+      { duration: 1, backgroundColor: this.primaryColor }
+    );
   };
 
   heapSortAnimation = () => {
@@ -722,8 +732,8 @@ export default class Animacje extends React.Component {
   };
 }
 
-const print = (arr) => {
+const print = (arr, l, r) => {
   let str = "[ ";
-  arr.forEach((e) => (str += e + " "));
+  arr.filter((e, i) => i >= l && i <= r).forEach((e) => (str += e + " "));
   console.log(`${str} ]`);
 };
