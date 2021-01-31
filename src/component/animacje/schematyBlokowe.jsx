@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 function getModalStyle() {
   const top = 50;
   const left = 50;
-  const width = 600;
+  const width = 700;
 
   return {
     top: `${top}%`,
