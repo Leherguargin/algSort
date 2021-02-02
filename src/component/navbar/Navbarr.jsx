@@ -17,10 +17,10 @@ class Navbarr extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link as={Link} to="/" className="text-info">
-              Home
+              Strona główna
             </Nav.Link>
             <Nav.Link as={Link} to="/wykresy" className="text-info">
-              Wykres
+              Wykresy
             </Nav.Link>
             <Nav.Link as={Link} to="/animacje" className="text-info">
               Animacje
