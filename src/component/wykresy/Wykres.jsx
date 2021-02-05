@@ -29,6 +29,7 @@ export default class Wykres extends PureComponent {
     insertionSort: "sortowanie przez wstawianie",
     bubbleSort: "sortowanie bąbelkowe",
     selectionSort: "sortowanie przez wybór",
+    iloscElementowSortoweanejTAblicy: "liczba elementów",
   };
   x = [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2];
 
@@ -38,6 +39,7 @@ export default class Wykres extends PureComponent {
   }
 
   render() {
+    console.log(this.props.dane);
     let dane = [];
     this.props.dane.forEach((element) => {
       let el = {};
@@ -48,6 +50,7 @@ export default class Wykres extends PureComponent {
       el["sortowanie przez wstawianie"] = element["insertionSort"];
       el["sortowanie bąbelkowe"] = element["bubbleSort"];
       el["sortowanie przez wybór"] = element["selectionSort"];
+      el["liczba elementów"] = element["iloscElementowSortoweanejTAblicy"];
       dane.push(el);
     });
     let osY = (
@@ -88,7 +91,7 @@ export default class Wykres extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="iloscElementowSortoweanejTAblicy">
+          <XAxis dataKey="liczba elementów">
             <Label
               value="liczba elementów"
               offset={0}
