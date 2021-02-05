@@ -216,7 +216,11 @@ export default class Wykresy extends React.Component {
                     </div>
                   ))}
                   <FormControl component="fieldset">
-                    <FormLabel component="legend" style={{ color: "silver" }}>
+                    <FormLabel
+                      component="legend"
+                      className="text-white"
+                      style={{ color: "silver", fontSize: 22 }}
+                    >
                       Rodzaj złożoności
                     </FormLabel>
                     <RadioGroup

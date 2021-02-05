@@ -21,6 +21,15 @@ export default class Wykres extends PureComponent {
     "#ec6f10",
     "#334567",
   ];
+  mapping = {
+    quickSort: "sortowanie szybkie",
+    heapSort: "sortowanie przez kopcowanie",
+    mergeSort: "sortowanie przez scalanie",
+    countingSort: "sortowanie przez zliczanie",
+    insertionSort: "sortowanie przez wstawianie",
+    bubbleSort: "sortowanie bąbelkowe",
+    selectionSort: "sortowanie przez wybór",
+  };
   x = [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2];
 
   renderColorfulLegendText(value, entry) {
@@ -29,7 +38,18 @@ export default class Wykres extends PureComponent {
   }
 
   render() {
-    // console.log(this.props.dane);
+    let dane = [];
+    this.props.dane.forEach((element) => {
+      let el = {};
+      el["sortowanie szybkie"] = element["quickSort"];
+      el["sortowanie przez kopcowanie"] = element["heapSort"];
+      el["sortowanie przez scalanie"] = element["mergeSort"];
+      el["sortowanie przez zliczanie"] = element["countingSort"];
+      el["sortowanie przez wstawianie"] = element["insertionSort"];
+      el["sortowanie bąbelkowe"] = element["bubbleSort"];
+      el["sortowanie przez wybór"] = element["selectionSort"];
+      dane.push(el);
+    });
     let osY = (
       <YAxis>
         <Label
@@ -59,7 +79,7 @@ export default class Wykres extends PureComponent {
         <LineChart
           width={this.props.szerokoscWykresu}
           height={this.props.wysokoscWykresu}
-          data={this.props.dane}
+          data={dane}
           margin={{
             top: 20,
             right: 30,
@@ -84,7 +104,7 @@ export default class Wykres extends PureComponent {
               return (
                 <Line
                   type="monotone"
-                  dataKey={this.props.jakieAlgorytmy[index]}
+                  dataKey={this.mapping[this.props.jakieAlgorytmy[index]]}
                   label={this.x[index]}
                   stroke={this.kolorki[index]}
                   activeDot={{ r: 8 }}

@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 function getModalStyle() {
   const top = 50;
   const left = 50;
-  const width = 700;
+  const width = 350;
 
   return {
     top: `${top}%`,
@@ -19,7 +19,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 350,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
